@@ -1,6 +1,5 @@
 import { Kanit } from 'next/font/google'
 import React from 'react'
-import MagneticButton from '../ui/magneticButton'
 
 const kanit = Kanit({
     subsets: ["latin"],
@@ -29,7 +28,6 @@ function Navbar() {
                 )}</li>)}
             </div>
             {/* resume downloader */}
-            <MagneticButton />
         </nav>
     )
 }
