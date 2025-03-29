@@ -2,7 +2,7 @@ import React from 'react'
 
 function DualButton() {
   return (
-    <button className="btn-flip" data-back="Back" data-front="Front"></button>
+    <button className="btn-flip" data-back="Download" data-front="Resume"></button>
   )
 }
 
