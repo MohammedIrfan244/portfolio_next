@@ -1,25 +1,10 @@
 @import "tailwindcss";
 
-* {
-  box-sizing: border-box;
-}
 
-:root {
-  --background: #d1d5db;
-  --foreground: #171717;
-  --border-radius: 8px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #161616;
-    --foreground: #d1d5db;
-  }
-}
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: #171717;
+  color: #d1d5db;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -121,7 +106,7 @@ body {
 .line {
   fill:none;
   transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
-  stroke:var(--foreground);
+  stroke:#d1d5db;
   stroke-width:5.5;
   stroke-linecap:round;
 }
@@ -130,15 +115,15 @@ body {
   max-width: 400px;
   width: 100%;
   margin: 100px auto;
-  border-radius: var(--border-radius);
+  border-radius: 8px;
 }
 
 .card .inner {
   padding-block: 10px;
   padding-inline: 15px;
-  background: var(--background);
-  color: var(--foreground);
-  border-radius: var(--border-radius);
+  background: #171717;
+  color: #d1d5db;
+  border-radius: 8px;
 }
 
 .example-2 {
@@ -183,4 +168,64 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+.gradient {
+  text-shadow: -1px 2px rgba(128, 128, 128, 0.5);
+  background: -webkit-linear-gradient(whitesmoke, #1e2425);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  }
+
+.btn-flip {
+  opacity: 1;
+  outline: 0;
+  color: #fff;
+  line-height: 40px;
+  position: relative;
+  text-align: center;
+  letter-spacing: 1px;
+  display: inline-block;
+  text-decoration: none;
+  font-family: 'Open Sans';
+  text-transform: uppercase;
+}
+
+.btn-flip:hover:after {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+.btn-flip:hover:before {
+  opacity: 0;
+  transform: translateY(50%) rotateX(90deg);
+}
+
+.btn-flip:after {
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  color: #323237;
+  display: block;
+  transition: 0.5s;
+  position: absolute;
+  background: #adadaf;
+  content: attr(data-back);
+  transform: translateY(-50%) rotateX(90deg);
+}
+
+.btn-flip:before {
+  top: 0;
+  left: 0;
+  opacity: 1;
+  color: #adadaf;
+  display: block;
+  padding: 0 30px;
+  line-height: 40px;
+  transition: 0.5s;
+  position: relative;
+  background: #323237;
+  content: attr(data-front);
+  transform: translateY(0) rotateX(0);
 }

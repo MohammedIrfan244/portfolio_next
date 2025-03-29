@@ -3,6 +3,7 @@ import { Kanit } from 'next/font/google'
 import React, { useState } from 'react'
 import Download from '../ui/downloadButton'
 import ToggleButton from '../ui/toggleButton'
+import Link from 'next/link'
 
 const kanit = Kanit({
     subsets: ["latin"],
@@ -18,14 +19,14 @@ const links: ILink[] = [{ id: "about", key: "About Me" }, { id: "project", key: 
 function Navbar() {
     const [drop, setDrop] = useState<boolean>(false)
     return (
-        <nav className='fixed top-0 z-50 left-0 w-screen h-16 items-center justify-between flex px-5'>
+        <nav className='fixed top-0 z-50 left-0 w-screen h-16 sm:h-20 md:h-24 items-center justify-between flex px-5'>
             {/* name */}
-            <h2 className={`${kanit.className} text-3xl`}>irfan</h2>
+            <h2 className={`${kanit.className} hover:cursor-pointer text-3xl`}>irfan</h2>
             {/* navlinks for larger screen */}
             <div className="card example-2">
             <div className='items-center inner border border-gray-700 justify-between gap-5 hidden sm:flex'>
-                {links.map((link, index) => <a key={index + link.id} href={link.id} className='text-sm list-none hover:opacity-60 hover:cursor-pointer'>
-                        {link.key} </a>)}
+                {links.map((link, index) => <Link key={index + link.id} href={"#"+link.id} scroll={true} className='text-sm list-none hover:opacity-60 hover:cursor-pointer'>
+                        {link.key} </Link>)}
             </div>
             </div>
             <div onClick={() => setDrop((drop) => !drop)} className='text-sm list-none sm:hidden hover:opacity-60 hover:cursor-pointer'>
