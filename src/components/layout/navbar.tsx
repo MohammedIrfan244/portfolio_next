@@ -19,9 +19,9 @@ const links: ILink[] = [{ id: "about", key: "About Me" }, { id: "project", key: 
 function Navbar() {
     const [drop, setDrop] = useState<boolean>(false)
     return (
-        <nav className='fixed top-0 z-50 left-0 w-screen h-16 sm:h-20 md:h-24 items-center justify-between flex px-5'>
+        <nav className='fixed top-0 backdrop-opacity-10 z-50 left-0 w-screen h-16 sm:h-20 md:h-24 items-center justify-between flex px-5'>
             {/* name */}
-            <h2 className={`${kanit.className} hover:cursor-pointer text-3xl`}>irfan</h2>
+            <Link href={"#hero"} className={`${kanit.className} hover:cursor-pointer text-3xl`}>irfan</Link>
             {/* navlinks for larger screen */}
             <div className="card example-2">
             <div className='items-center inner border border-gray-700 justify-between gap-5 hidden sm:flex'>
