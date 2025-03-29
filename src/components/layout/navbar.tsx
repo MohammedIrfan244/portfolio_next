@@ -22,9 +22,11 @@ function Navbar() {
             {/* name */}
             <h2 className={`${kanit.className} text-3xl`}>irfan</h2>
             {/* navlinks for larger screen */}
-            <div className='items-center border rounded-4xl border-gray-700 py-3 px-5 justify-between gap-5 hidden sm:flex'>
+            <div className="card example-2">
+            <div className='items-center inner border border-gray-700 justify-between gap-5 hidden sm:flex'>
                 {links.map((link, index) => <a key={index + link.id} href={link.id} className='text-sm list-none hover:opacity-60 hover:cursor-pointer'>
                         {link.key} </a>)}
+            </div>
             </div>
             <div onClick={() => setDrop((drop) => !drop)} className='text-sm list-none sm:hidden hover:opacity-60 hover:cursor-pointer'>
                 <ToggleButton/>
