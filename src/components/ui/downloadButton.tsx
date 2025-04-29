@@ -1,12 +1,12 @@
 import React from 'react'
 
-interface IProp{
-    hidden:boolean
+interface IProp {
+  hidden: boolean
 }
 
-function Download({hidden}:IProp) {
+function Download({ hidden }: IProp) {
   return (
-    <button className={hidden?"download-button hidden sm:block":"block"}>
+    <button className={hidden ? "download-button hidden sm:block" : "block"}>
       <div className="docs">
         <svg
           viewBox="0 0 24 24"
@@ -46,7 +46,7 @@ function Download({hidden}:IProp) {
           <line x1="12" y1="15" x2="12" y2="3"></line>
         </svg>
       </div>
-    </button>   
+    </button>
   )
 }
 

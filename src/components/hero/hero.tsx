@@ -12,13 +12,13 @@ function Hero() {
     return (
         <div className="relative h-screen pt-24" id='hero'>
             {/* Background Text */}
-            <motion.div 
+            <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 0.5 }}
                 transition={{ duration: 1 }}
                 className="absolute inset-0 -z-10 flex items-center justify-start overflow-hidden"
             >
-                <motion.p 
+                <motion.p
                     initial={{ x: -100 }}
                     whileInView={{ x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
@@ -30,7 +30,7 @@ function Hero() {
 
             {/* Foreground Content */}
             <div className="flex justify-center items-center flex-col gap-10 w-full h-full">
-                <motion.div 
+                <motion.div
                     initial={{ y: -50, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6 }}
@@ -42,7 +42,7 @@ function Hero() {
                     >
                         <Image src={profile} alt='Mohammed Irfan' className='w-36 h-36' />
                     </motion.div>
-                    <motion.p 
+                    <motion.p
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ delay: 0.3, duration: 0.6 }}
@@ -82,7 +82,7 @@ function Hero() {
                     </motion.p>
                 </motion.div>
 
-                <motion.div 
+                <motion.div
                     initial={{ y: 50, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 1.3, duration: 0.6 }}
