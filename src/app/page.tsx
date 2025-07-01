@@ -1,12 +1,9 @@
-import Nav from "@/component/Nav";
-import Open from "@/component/Open";
-
+import React from 'react';
 
 export default function Home() {
   return (
-    <>
-    <Nav />
-    <Open />
-    </>
+    <div>
+      Hello World!
+    </div>
   );
 }
