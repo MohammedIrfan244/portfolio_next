@@ -41,7 +41,7 @@ const navigation: INavigation[] = [
 function Nav({ onClick, selected }: INavProp) {
     return (
         <div className='p-10 flex flex-row justify-between md:flex-col'>
-            <h1 className={`${youngSerif.className} text-2xl sm:text-3xl md:text-4xl`}>Irfan</h1>
+            <h1 onClick={()=>onClick("hello")} className={`${youngSerif.className} hover:cursor-pointer text-xl sm:text-2xl md:text-3xl`}>Irfan</h1>
             <div className='md:space-y-6 text-stone-800 font-semibold text-sm space-x-4 flex flex-row md:flex-col'>
                 {navigation.map(nav => (
                     <button className={`text-start hover:cursor-pointer transition-all duration-200 ease-in-out text-nowrap hover:text-stone-500 ${selected === nav.value ? 'text-black font-bold text-base' : null}`} onClick={() => onClick(nav.value)} key={nav.id}>{nav.name}</button>
