@@ -31,14 +31,14 @@ function Welcome() {
 
       // More generous magnetic area
       const hoverArea = isHovering
-        ? Math.max(rect.width, rect.height) * 1.1
-        : Math.max(rect.width, rect.height);
+        ? Math.max(rect.width, rect.height) 
+        : Math.max(rect.width, rect.height) * 0.5;
 
       if (distance < hoverArea) {
         setIsHovering(true);
         setPosition({
-          x: deltaX * 0.3,
-          y: deltaY * 0.4, // stronger vertical motion
+          x: deltaX * 0.2,
+          y: deltaY * 0.1, 
           rotation: deltaX * 0.02,
         });
       } else if (isHovering) {
