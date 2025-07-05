@@ -106,7 +106,7 @@ function Hero() {
   return (
     <motion.div 
       ref={containerRef}
-      className='w-full h-screen px-6 md:px-7 rounded-b-2xl sm:rounded-b-3xl flex-col md:rounded-b-4xl lg:px-10 flex items-start justify-between bg-white relative overflow-hidden'
+      className='w-full py-10 sm:py-5 md:py-0 h-screen px-6 md:px-7 rounded-b-2xl sm:rounded-b-3xl flex-col md:rounded-b-4xl lg:px-10 flex items-start justify-between bg-white relative overflow-hidden'
       variants={containerVariants}
       initial="initial"
       animate="animate"
