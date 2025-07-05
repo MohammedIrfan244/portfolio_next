@@ -5,28 +5,35 @@ const projects: IProject[] = [
     {
         id:"1keyone",
         title:"Scopeo Monitor",
-        image:"/images/scopeo-monitor.png",
+        image:"https://i.pinimg.com/736x/f2/1d/35/f21d35c157b365aaa52a3718ee448e5c.jpg",
         github:"",
         live:"https://scopeo-monitor.vercel.app/"
     },
     {
         id:"2keytwo",
         title:"Pymedaca",
-        image:"/images/scopeo-dashboard.png",
+        image:"https://i.pinimg.com/736x/f2/1d/35/f21d35c157b365aaa52a3718ee448e5c.jpg",
         github:"",
         live:"https://scopeo-dashboard.vercel.app/"
     },
     {
         id:"Furniche",
         title:"Scopeo Admin",
-        image:"/images/scopeo-admin.png",
+        image:"https://i.pinimg.com/736x/f2/1d/35/f21d35c157b365aaa52a3718ee448e5c.jpg",
         github:"",
         live:"https://scopeo-admin.vercel.app/"
     },
     {
         id:"4keyfour",
         title:"Instagam Clone",
-        image:"/images/scopeo-chat.png",
+        image:"https://i.pinimg.com/736x/f2/1d/35/f21d35c157b365aaa52a3718ee448e5c.jpg",
+        github:"",
+        live:"https://scopeo-chat.vercel.app/"
+    },
+    {
+        id:"5keyfive",
+        title:"Scopeo Chat",
+        image:"https://i.pinimg.com/736x/f2/1d/35/f21d35c157b365aaa52a3718ee448e5c.jpg",
         github:"",
         live:"https://scopeo-chat.vercel.app/"
     }

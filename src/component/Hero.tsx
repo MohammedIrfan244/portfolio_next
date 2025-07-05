@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState, useRef } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence, easeIn, easeOut } from 'framer-motion'
 import { youngSerif, inter } from '@/lib/font'
@@ -170,5 +171,3 @@ function Hero() {
 }
 
 export default Hero
-
-{/* <div className={`py-2 sm:py-3 md:py-4 lg:py-5 text-base font-semibold ${inter.className} text-stone-700`}> */}
