@@ -3,7 +3,7 @@ import Contact from '@/component/Contact'
 import Hero from '@/component/Hero'
 import Navbar from '@/component/layout/Navbar'
 import Profile from '@/component/Profile'
-import Projects from '@/component/Projects'
+import Projects from '@/component/project/Projects'
 import { useLenisScroll } from '@/lib/hooks/useLenisScroll'
 import React from 'react'
 
