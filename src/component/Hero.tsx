@@ -2,7 +2,7 @@ import React from 'react'
 
 function Hero() {
   return (
-    <div className='px-6 md:px-7 pt-20 lg:px-10'>
+    <div className='w-full h-screen flex items-center justify-center text-3xl bg-white font-bold text-stone-800'>
       Hero
     </div>
   )
