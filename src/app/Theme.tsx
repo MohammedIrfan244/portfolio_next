@@ -7,13 +7,13 @@ import React from 'react'
 
 function Theme() {
   return (
-    <div className=' px-6 md:px-7 lg:px-10 w-full'>
+    <>
         <Navbar/>
       <Hero/>
       <Projects/>
       <Profile/>
       <Contact/>
-    </div>
+    </>
   )
 }
 
