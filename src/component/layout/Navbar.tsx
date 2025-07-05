@@ -34,7 +34,7 @@ function Navbar() {
       transition={{ duration: 0.5 }}
       href='#'
       onClick={(e) => handleSmoothScroll(e, 'top')}
-       className='text-lg tracking-tighter hover:cursor-pointer hover:opacity-75'>Mohammed Irfan</motion.a>
+       className='text-lg tracking-tighter hover:cursor-pointer hover:opacity-75'>Irfan</motion.a>
       <div className='flex gap-3 md:gap-5 lg:gap-6 text-base'>
         <motion.a
         initial={{ opacity: 0, y: -20 }}
