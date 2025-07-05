@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { inter } from '@/lib/font'
+import { youngSerif } from '@/lib/font'
 import { IProject } from '@/lib/types'
 
 
@@ -8,8 +8,8 @@ function ProjectCard({ project }: { project: IProject }) {
 console.log(project)
     },[project])
   return (
-    <div className={`${inter.className}`}>
-      {project.title}
+    <div className={`${youngSerif.className}`}>
+      
     </div>
   )
 }

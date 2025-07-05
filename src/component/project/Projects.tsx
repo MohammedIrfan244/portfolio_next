@@ -7,15 +7,6 @@ import projects from '@/lib/data/projects'
 import ProjectCard from './ProjectCard'
 
 
-// Type for Lenis scroll data
-interface LenisScrollData {
-  scroll: number
-  limit: number
-  velocity: number
-  direction: number
-  progress: number
-}
-
 // Type for Lenis constructor options
 interface LenisOptions {
   duration: number
@@ -25,14 +16,15 @@ interface LenisOptions {
 
 function Projects() {
   const headingRef = useRef<HTMLDivElement>(null)
-  const isInView = useInView(headingRef, { once: false, margin: "0px 0px -50% 0px" })
+  const isInView = useInView(headingRef, { once: false, margin: "100px 0px -20% 0px" })
   const [scrollProgress, setScrollProgress] = useState<number>(0)
   
-  useEffect(() => {    
+  useEffect(() => {
+    
+    
     const initLenis = async () => {
-      
         const Lenis = (await import('lenis')).default
-        const lenis = new Lenis({
+       const lenis = new Lenis({
           duration: 1.2,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           smooth: true,
@@ -46,26 +38,24 @@ function Projects() {
         requestAnimationFrame(raf)
         
         // Listen for scroll events
-        if (lenis) {
-          lenis.on('scroll', ({  }: LenisScrollData) => {
-            if (headingRef.current) {
-              const rect = headingRef.current.getBoundingClientRect()
-              const windowHeight = window.innerHeight
-              const elementTop = rect.top
-              const elementHeight = rect.height
-              
-              // Calculate scroll progress for the heading
-              const startOffset = windowHeight * 0.8
-              const endOffset = -elementHeight
-              const totalDistance = startOffset - endOffset
-              const currentDistance = startOffset - elementTop
-              const calculatedProgress = Math.max(0, Math.min(1, currentDistance / totalDistance))
-              
-              setScrollProgress(calculatedProgress)
-            }
-          })
-        }
-        return () => lenis.destroy()
+        lenis.on('scroll', () => {
+          if (headingRef.current) {
+            const rect = headingRef.current.getBoundingClientRect()
+            const windowHeight = window.innerHeight
+            const elementTop = rect.top
+            const elementHeight = rect.height
+            
+            // Calculate scroll progress for the heading
+            const startOffset = windowHeight * 0.8
+            const endOffset = -elementHeight
+            const totalDistance = startOffset - endOffset
+            const currentDistance = startOffset - elementTop
+            const calculatedProgress = Math.max(0, Math.min(1, currentDistance / totalDistance))
+            
+            setScrollProgress(calculatedProgress)
+          }
+        })
+        return ()=> lenis.destroy()
     }
     
     initLenis()
@@ -79,8 +69,8 @@ function Projects() {
   const letterVariants: Variants = {
     hidden: { 
       opacity: 0, 
-      y: 40, 
-      scale: 0.3 
+      y: 50, 
+      scale: 0.2 
     },
     visible: (i: number) => ({
       opacity: 1,
@@ -95,10 +85,10 @@ function Projects() {
     exit: (i: number) => ({
       opacity: 0,
       y: -30,
-      scale: 0.5,
+      scale: 0.4,
       transition: {
-        delay: i * 0.05,
-        duration: 0.9,
+        delay: i * 0.02,
+        duration: 0.5,
         ease: [0.42, 0, 0.58, 1]
       }
     })
@@ -110,7 +100,7 @@ function Projects() {
 
     const letterProgress: number = (index + 1) / letters.length
     const appearThreshold: number = letterProgress * 0.3 // Letters appear in first 30% of scroll
-    const disappearThreshold: number = 0.7 + (letterProgress * 0.2) // Letters disappear in last 20% of scroll
+    const disappearThreshold: number = 0.7 + (letterProgress * 0.3) // Letters disappear in last 30% of scroll
 
     if (scrollProgress < appearThreshold) {
       return 0
