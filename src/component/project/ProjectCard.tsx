@@ -11,7 +11,6 @@ function ProjectCard({ project }: { project: IProject }) {
 
     useEffect(() => {
         
-        // Check if device is mobile
         const checkMobile = () => {
             setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window)
         }
@@ -30,7 +29,7 @@ function ProjectCard({ project }: { project: IProject }) {
 
     const handleTouchEnd = () => {
         if (isMobile) {
-            setTimeout(() => setIsPressed(false), 2000) // Show for 2 seconds
+            setTimeout(() => setIsPressed(false), 2000) 
         }
     }
 
@@ -40,8 +39,6 @@ function ProjectCard({ project }: { project: IProject }) {
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
         >
-            {/* Background Images */}
-            {/* Cover Image - Default */}
             <div className={`absolute inset-0 transition-all duration-500 ease-out ${
                 isMobile 
                     ? (isPressed ? 'scale-110 opacity-0' : 'scale-100 opacity-100')
@@ -55,7 +52,6 @@ function ProjectCard({ project }: { project: IProject }) {
                 />
             </div>
             
-            {/* Project Image - Hover/Touch */}
             <div className={`absolute inset-0 transition-all duration-500 ease-out ${
                 isMobile 
                     ? (isPressed ? 'opacity-100 scale-110' : 'opacity-0 scale-100')
@@ -69,16 +65,13 @@ function ProjectCard({ project }: { project: IProject }) {
                 />
             </div>
 
-            {/* Overlay */}
             <div className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
                 isMobile 
                     ? (isPressed ? 'bg-black/60' : 'bg-black/40')
                     : 'group-hover:bg-black/60'
             }`} />
 
-            {/* Content Container */}
             <div className="absolute inset-0 flex flex-col justify-between p-3 sm:p-4 md:p-5 lg:p-6 z-10">
-                {/* Links - Top Right */}
                 <div className="flex gap-2 sm:gap-3 justify-end">
                     <a
                         href={project.github}
@@ -98,7 +91,6 @@ function ProjectCard({ project }: { project: IProject }) {
                     </a>
                 </div>
 
-                {/* Title - Bottom Left */}
                 <div className="flex-1 flex items-end">
                     <h3 className="text-white text-sm md:text-base font-thin transform transition-transform duration-300 group-hover:translate-y-[-4px]">
                         {project.title}
