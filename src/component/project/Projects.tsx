@@ -88,7 +88,7 @@ function Projects() {
     initLenis()
   }, [])
   
-  const text: string = "My Works"
+  const text: string = "My Works."
   const letters: string[] = text.split('')
   
   const letterVariants: Variants = {
@@ -221,7 +221,6 @@ function Projects() {
         initial="hidden"
         animate={isCarouselInView ? "visible" : "hidden"}
       >
-        {/* Navigation Buttons */}
         <motion.div 
           className='flex justify-end gap-2 mb-6'
           variants={buttonVariants}

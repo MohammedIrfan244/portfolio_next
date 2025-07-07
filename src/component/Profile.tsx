@@ -108,7 +108,7 @@ function Profile() {
         }}
         className={`${playfairDisplay.className} text-[100px] sm:text-[150px] md:text-[300px] text-stone-800 lg:text-[350px]`}
       >
-        Me
+        Me.
       </motion.h1>
 
       <div className={`${inter.className} text-sm sm:text-base md:text-lg space-y-5 sm:space-y-10 md:space-y-14 lg:space-y-20`}>
