@@ -11,18 +11,18 @@ function Hero() {
     offset: ["start start", "end start"]
   })
 
-  // Transform scroll progress to role index
+
   const roleIndex = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8, 1], [0, 1, 2, 3, 4, 5])
 
   const roles = [
-    "web developer",
+    "Web developer",
     "UI/UX designer", 
-    "full-stack developer",
-    "frontend engineer",
-    "creative coder"
+    "Full-stack developer",
+    "Frontend engineer",
+    "Freelancer"
   ]
 
-  // Update current role based on scroll
+
   useEffect(() => {
     const unsubscribe = roleIndex.on("change", (latest) => {
       const index = Math.round(latest)
@@ -33,7 +33,7 @@ function Hero() {
     return () => unsubscribe()
   }, [roleIndex, currentRole, roles.length])
 
-  // Initialize Lenis
+
   useEffect(() => {
     const initLenis = async () => {
       const Lenis = (await import('lenis')).default
@@ -57,7 +57,7 @@ function Hero() {
     initLenis()
   }, [])
 
-  // Animation variants
+
   const containerVariants = {
     initial: { opacity: 1 },
     animate: { 
@@ -112,7 +112,6 @@ function Hero() {
       initial="initial"
       animate="animate"
     >
-      {/* Easter egg with subtle animation */}
       <motion.p 
         className='text-xs text-stone-400 select-none'
         variants={itemVariants}
@@ -122,7 +121,6 @@ function Hero() {
         Easter egg : You are not supposed to see this bruh 🤫
       </motion.p>
 
-      {/* Main content */}
       <div className='flex w-full items-center justify-center'>
         <motion.div 
           className='space-y-1 sm:space-y-2 text-center'
@@ -146,7 +144,6 @@ function Hero() {
         </motion.div>
       </div>
 
-      {/* Role with scroll-based changes */}
       <motion.div 
         className='w-full flex py-10'
         variants={itemVariants}

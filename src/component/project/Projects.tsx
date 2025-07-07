@@ -5,9 +5,9 @@ import type { Variants } from 'framer-motion'
 import { youngSerif } from '@/lib/font'
 import projects from '@/lib/data/projects'
 import ProjectCard from './ProjectCard'
+import useEmblaCarousel from 'embla-carousel-react'
+import { LuCircleChevronLeft ,LuCircleChevronRight } from "react-icons/lu";
 
-
-// Type for Lenis constructor options
 interface LenisOptions {
   duration: number
   easing: (t: number) => number
@@ -19,53 +19,76 @@ function Projects() {
   const isInView = useInView(headingRef, { once: false, margin: "100px 0px -20% 0px" })
   const [scrollProgress, setScrollProgress] = useState<number>(0)
   
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: 'start',
+    skipSnaps: false,
+    dragFree: true,
+    breakpoints: {
+      '(min-width: 768px)': { dragFree: false }
+    }
+  })
+  
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
+  
+  const scrollPrev = () => emblaApi && emblaApi.scrollPrev()
+  const scrollNext = () => emblaApi && emblaApi.scrollNext()
+  
+  const onSelect = () => {
+    if (!emblaApi) return
+    setPrevBtnEnabled(emblaApi.canScrollPrev())
+    setNextBtnEnabled(emblaApi.canScrollNext())
+  }
+  
   useEffect(() => {
-    
-    
+    if (!emblaApi) return
+    onSelect()
+    emblaApi.on('select', onSelect)
+    emblaApi.on('reInit', onSelect)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [emblaApi])
+  
+  useEffect(() => {
     const initLenis = async () => {
-        const Lenis = (await import('lenis')).default
-       const lenis = new Lenis({
-          duration: 1.2,
-          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          smooth: true,
-        } as LenisOptions)
-        
-        function raf(time: number): void {
-          lenis?.raf(time)
-          requestAnimationFrame(raf)
-        }
-        
+      const Lenis = (await import('lenis')).default
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true,
+      } as LenisOptions)
+      
+      function raf(time: number): void {
+        lenis?.raf(time)
         requestAnimationFrame(raf)
-        
-        // Listen for scroll events
-        lenis.on('scroll', () => {
-          if (headingRef.current) {
-            const rect = headingRef.current.getBoundingClientRect()
-            const windowHeight = window.innerHeight
-            const elementTop = rect.top
-            const elementHeight = rect.height
-            
-            // Calculate scroll progress for the heading
-            const startOffset = windowHeight * 0.8
-            const endOffset = -elementHeight
-            const totalDistance = startOffset - endOffset
-            const currentDistance = startOffset - elementTop
-            const calculatedProgress = Math.max(0, Math.min(1, currentDistance / totalDistance))
-            
-            setScrollProgress(calculatedProgress)
-          }
-        })
-        return ()=> lenis.destroy()
+      }
+      
+      requestAnimationFrame(raf)
+      
+      lenis.on('scroll', () => {
+        if (headingRef.current) {
+          const rect = headingRef.current.getBoundingClientRect()
+          const windowHeight = window.innerHeight
+          const elementTop = rect.top
+          const elementHeight = rect.height
+          
+          const startOffset = windowHeight * 0.8
+          const endOffset = -elementHeight
+          const totalDistance = startOffset - endOffset
+          const currentDistance = startOffset - elementTop
+          const calculatedProgress = Math.max(0, Math.min(1, currentDistance / totalDistance))
+          
+          setScrollProgress(calculatedProgress)
+        }
+      })
+      return () => lenis.destroy()
     }
     
     initLenis()
-    
   }, [])
   
   const text: string = "My Works"
   const letters: string[] = text.split('')
   
-  // Animation variants for letters
   const letterVariants: Variants = {
     hidden: { 
       opacity: 0, 
@@ -94,13 +117,12 @@ function Projects() {
     })
   }
   
-  // Calculate which letters should be visible based on scroll progress
   const getLetterOpacity = (index: number): number => {
     if (!isInView) return 0
 
     const letterProgress: number = (index + 1) / letters.length
-    const appearThreshold: number = letterProgress * 0.3 // Letters appear in first 30% of scroll
-    const disappearThreshold: number = 0.7 + (letterProgress * 0.3) // Letters disappear in last 30% of scroll
+    const appearThreshold: number = letterProgress * 0.3 
+    const disappearThreshold: number = 0.7 + (letterProgress * 0.3) 
 
     if (scrollProgress < appearThreshold) {
       return 0
@@ -112,17 +134,17 @@ function Projects() {
   }
   
   return (
-    <div id='projects' className='px-6 md:px-7 lg:px-10 py-10 sm:py-12 md:py-14 space-y-10 sm:space-y-14 md:space-y-20 w-full'>
+    <div id='projects' className='px-4 sm:px-6 md:px-7 lg:px-10 py-10 sm:py-12 md:py-14 space-y-8 sm:space-y-10 md:space-y-14 lg:space-y-20 w-full'>
       <div ref={headingRef} className="relative">
-        <h1 className={`text-6xl sm:text-7xl md:text-8xl text-white ${youngSerif.className}`}>
+        <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white ${youngSerif.className}`}>
           {letters.map((letter: string, index: number) => {
             const opacity = getLetterOpacity(index)
             
             return (
               <motion.span
-                key={`${letter}-${index}`} // Better key for duplicate letters
+                key={`${letter}-${index}`}
                 custom={index}
-                variants={letterVariants}
+                variants={letterVariants}  
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
                 style={{
@@ -139,11 +161,41 @@ function Projects() {
         </h1>
       </div>
       
-      <div className='text-white'>
-        {/* Your project cards here */}
-        {projects.map((project, index) => (
-          <ProjectCard key={project.id || index} project={project} />
-        ))}
+      <div className='relative'>
+        <div className='flex justify-end gap-2 mb-6'>
+          <button
+            onClick={scrollPrev}
+            disabled={!prevBtnEnabled}
+            className={`p-2 rounded-full transition-all duration-300 ${
+              prevBtnEnabled 
+                ? 'bg-white/20 hover:bg-white/30 text-white' 
+                : 'bg-white/10 text-white/50 cursor-not-allowed'
+            }`}
+          >
+            <LuCircleChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={scrollNext}
+            disabled={!nextBtnEnabled}
+            className={`p-2 rounded-full transition-all duration-300 ${
+              nextBtnEnabled 
+                ? 'bg-white/20 hover:bg-white/30 text-white' 
+                : 'bg-white/10 text-white/50 cursor-not-allowed'
+            }`}
+          >
+            <LuCircleChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex gap-4 sm:gap-6 md:gap-8">
+            {projects.map((project, index) => (
+              <div key={project.id + index} className="flex-none">
+                <ProjectCard project={project} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )
