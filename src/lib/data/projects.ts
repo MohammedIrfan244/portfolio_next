@@ -22,7 +22,7 @@ const projects: IProject[] = [
         id:"4keyfour",
         title:"Instagam Clone",
         image:"/images/instagram.png",
-        cover:"/images/instacover.jpg",
+        cover:"/images/instagramcover.jpg",
         github:"https://github.com/MohammedIrfan244/instagram_clone/",
         live:"https://instagram-clone-z.vercel.app/"
     },
