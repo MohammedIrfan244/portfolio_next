@@ -5,7 +5,7 @@ const projects: IProject[] = [
     {
         id:"1keyone",
         title:"Scopeo Monitor",
-        image:"https://i.pinimg.com/736x/f2/1d/35/f21d35c157b365aaa52a3718ee448e5c.jpg",
+        image:"/images/monitor.png",
         cover:"/images/monitorcover.jpg",
         github:"",
         live:"https://scopeo-monitor.vercel.app/"
@@ -13,7 +13,7 @@ const projects: IProject[] = [
     {
         id:"2keytwo",
         title:"Pymedaca",
-        image:"https://i.pinimg.com/736x/f2/1d/35/f21d35c157b365aaa52a3718ee448e5c.jpg",
+        image:"/images/pymedaca.png",
         cover:"/images/pymedacacover.jpg",
         github:"",
         live:"https://scopeo-dashboard.vercel.app/"
@@ -21,7 +21,7 @@ const projects: IProject[] = [
     {
         id:"4keyfour",
         title:"Instagam Clone",
-        image:"https://i.pinimg.com/736x/f2/1d/35/f21d35c157b365aaa52a3718ee448e5c.jpg",
+        image:"/images/instagram.png",
         cover:"/images/instacover.jpg",
         github:"",
         live:"https://scopeo-chat.vercel.app/"
@@ -29,7 +29,7 @@ const projects: IProject[] = [
     {
         id:"5keyfive",
         title:"Aura",
-        image:"https://i.pinimg.com/736x/f2/1d/35/f21d35c157b365aaa52a3718ee448e5c.jpg",
+        image:"/images/aura.png",
         cover:"/images/auracover.jpg",
         github:"",
         live:"https://scopeo-chat.vercel.app/"
