@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { youngSerif } from '@/lib/font'
+import { playfairDisplay } from '@/lib/font'
 import { IProject } from '@/lib/types'
 import Image from 'next/image'
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
@@ -35,7 +35,7 @@ function ProjectCard({ project }: { project: IProject }) {
 
     return (
         <div 
-            className={`${youngSerif.className} w-[280px] select-none sm:w-[320px] md:w-[360px] lg:w-[400px] h-[200px] sm:h-[240px] md:h-[280px] lg:h-[300px] overflow-hidden relative rounded-lg group cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-300`}
+            className={`${playfairDisplay.className} w-[350px] select-none sm:w-[450px] md:w-[500px] lg:w-[550px] h-[400px] sm:h-[350px] md:h-[400px] lg:h-[450px] overflow-hidden relative rounded-lg group cursor-pointer transition-shadow duration-300`}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
         >
@@ -79,7 +79,7 @@ function ProjectCard({ project }: { project: IProject }) {
                         rel="noopener noreferrer"
                         className="p-1.5 sm:p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
                     >
-                        <FiGithub className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                        <FiGithub className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
                     </a>
                     <a
                         href={project.live}
@@ -87,7 +87,7 @@ function ProjectCard({ project }: { project: IProject }) {
                         rel="noopener noreferrer"
                         className="p-1.5 sm:p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
                     >
-                        <FiExternalLink className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                        <FiExternalLink className="w-2 h-2 sm:w-3 sm:h-3 text-white" />
                     </a>
                 </div>
 

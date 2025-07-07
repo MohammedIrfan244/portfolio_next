@@ -2,11 +2,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import type { Variants } from 'framer-motion'
-import { youngSerif } from '@/lib/font'
+import { playfairDisplay } from '@/lib/font'
 import projects from '@/lib/data/projects'
 import ProjectCard from './ProjectCard'
 import useEmblaCarousel from 'embla-carousel-react'
-import { LuCircleChevronLeft ,LuCircleChevronRight } from "react-icons/lu";
+import { LuCircleChevronLeft, LuCircleChevronRight } from "react-icons/lu"
 
 interface LenisOptions {
   duration: number
@@ -16,7 +16,9 @@ interface LenisOptions {
 
 function Projects() {
   const headingRef = useRef<HTMLDivElement>(null)
+  const carouselRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(headingRef, { once: false, margin: "100px 0px -20% 0px" })
+  const isCarouselInView = useInView(carouselRef, { once: true, margin: "0px 0px -20% 0px" })
   const [scrollProgress, setScrollProgress] = useState<number>(0)
   
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -116,6 +118,57 @@ function Projects() {
       }
     })
   }
+
+  const carouselVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 60
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.42, 0, 0.58, 1],
+        staggerChildren: 0.1
+      }
+    }
+  }
+
+  const buttonVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      x: 20,
+      scale: 0.8
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.42, 0, 0.58, 1]
+      }
+    }
+  }
+
+  const cardVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 30,
+      scale: 0.95
+    },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.6,
+        ease: [0.42, 0, 0.58, 1]
+      }
+    })
+  }
   
   const getLetterOpacity = (index: number): number => {
     if (!isInView) return 0
@@ -134,9 +187,9 @@ function Projects() {
   }
   
   return (
-    <div id='projects' className='px-4 sm:px-6 md:px-7 lg:px-10 py-12 sm:py-16 md:py-20 space-y-8 sm:space-y-10 md:space-y-14 lg:space-y-20 w-full'>
+    <div id='projects' className='px-4 sm:px-6 md:px-7 lg:px-10 py-12 sm:py-16 md:py-20 space-y-6 sm:space-y-8 md:space-y-12 lg:space-y-16 w-full'>
       <div ref={headingRef} className="relative">
-        <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white ${youngSerif.className}`}>
+        <h1 className={`text-4xl sm:text-5xl font-thin md:text-6xl lg:text-7xl xl:text-8xl text-white ${playfairDisplay.className}`}>
           {letters.map((letter: string, index: number) => {
             const opacity = getLetterOpacity(index)
             
@@ -161,42 +214,70 @@ function Projects() {
         </h1>
       </div>
       
-      <div className='relative'>
-        <div className='flex justify-end gap-2 mb-6'>
-          <button
+      <motion.div 
+        ref={carouselRef}
+        className='relative'
+        variants={carouselVariants}
+        initial="hidden"
+        animate={isCarouselInView ? "visible" : "hidden"}
+      >
+        {/* Navigation Buttons */}
+        <motion.div 
+          className='flex justify-end gap-2 mb-6'
+          variants={buttonVariants}
+        >
+          <motion.button
             onClick={scrollPrev}
             disabled={!prevBtnEnabled}
             className={`p-2 rounded-full transition-all duration-300 ${
               prevBtnEnabled 
-                ? 'bg-white/20 hover:bg-white/30 text-white' 
+                ? 'bg-white/20 hover:bg-white/30 text-white hover:scale-105' 
                 : 'bg-white/10 text-white/50 cursor-not-allowed'
             }`}
+            whileHover={{ scale: prevBtnEnabled ? 1.05 : 1 }}
+            whileTap={{ scale: prevBtnEnabled ? 0.95 : 1 }}
+            variants={buttonVariants}
           >
             <LuCircleChevronLeft className="w-5 h-5" />
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={scrollNext}
             disabled={!nextBtnEnabled}
             className={`p-2 rounded-full transition-all duration-300 ${
               nextBtnEnabled 
-                ? 'bg-white/20 hover:bg-white/30 text-white' 
+                ? 'bg-white/20 hover:bg-white/30 text-white hover:scale-105' 
                 : 'bg-white/10 text-white/50 cursor-not-allowed'
             }`}
+            whileHover={{ scale: nextBtnEnabled ? 1.05 : 1 }}
+            whileTap={{ scale: nextBtnEnabled ? 0.95 : 1 }}
+            variants={buttonVariants}
           >
             <LuCircleChevronRight className="w-5 h-5" />
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
 
-        <div className="overflow-hidden" ref={emblaRef}>
+        {/* Carousel Container */}
+        <motion.div 
+          className="overflow-hidden" 
+          ref={emblaRef}
+          variants={carouselVariants}
+        >
           <div className="flex gap-4 sm:gap-6 md:gap-8">
             {projects.map((project, index) => (
-              <div key={project.id + index} className="flex-none">
+              <motion.div 
+                key={project.id + index} 
+                className="flex-none"
+                custom={index}
+                variants={cardVariants}
+                initial="hidden"
+                animate={isCarouselInView ? "visible" : "hidden"}
+              >
                 <ProjectCard project={project} />
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   )
 }
