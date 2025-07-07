@@ -134,7 +134,7 @@ function Projects() {
   }
   
   return (
-    <div id='projects' className='px-4 sm:px-6 md:px-7 lg:px-10 py-10 sm:py-12 md:py-14 space-y-8 sm:space-y-10 md:space-y-14 lg:space-y-20 w-full'>
+    <div id='projects' className='px-4 sm:px-6 md:px-7 lg:px-10 py-12 sm:py-16 md:py-20 space-y-8 sm:space-y-10 md:space-y-14 lg:space-y-20 w-full'>
       <div ref={headingRef} className="relative">
         <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white ${youngSerif.className}`}>
           {letters.map((letter: string, index: number) => {
