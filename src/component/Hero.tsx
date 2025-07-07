@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState, useRef } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence, easeIn, easeOut } from 'framer-motion'
-import { youngSerif, inter } from '@/lib/font'
+import { playfairDisplay, inter } from '@/lib/font'
 
 function Hero() {
   const [currentRole, setCurrentRole] = useState(0)
@@ -134,7 +134,7 @@ function Hero() {
           </motion.p>
           
           <motion.h1 
-            className={`${youngSerif.className} text-4xl sm:text-5xl md:text-6xl text-stone-800 font-bold`}
+            className={`${playfairDisplay.className} text-4xl sm:text-5xl md:text-6xl text-stone-800 font-bold`}
             variants={itemVariants}
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.3 }}

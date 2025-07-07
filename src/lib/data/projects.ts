@@ -12,7 +12,7 @@ const projects: IProject[] = [
     },
     {
         id:"2keytwo",
-        title:"Pymedaca - the digital classroom",
+        title:"Pymedaca - The Digital Classroom",
         image:"/images/pymedaca.png",
         cover:"/images/pymedacacover.jpg",
         github:"https://github.com/MohammedIrfan244/pymedaca_client",
