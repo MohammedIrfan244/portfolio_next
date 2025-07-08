@@ -189,7 +189,7 @@ function Projects() {
   return (
     <div id='projects' className='px-4 sm:px-6 md:px-7 lg:px-10 py-12 sm:py-16 md:py-20 space-y-6 sm:space-y-8 md:space-y-12 lg:space-y-16 w-full'>
       <div ref={headingRef} className="relative">
-        <h1 className={`font-thin text-7xl md:text-8xl text-white ${playfairDisplay.className}`}>
+        <h1 className={`font-thin text-8xl md:text-9xl text-white ${playfairDisplay.className}`}>
           {letters.map((letter: string, index: number) => {
             const opacity = getLetterOpacity(index)
             
