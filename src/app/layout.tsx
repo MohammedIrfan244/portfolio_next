@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     siteName: "Mohammed Irfan Portfolio",
     images: [
       {
-        url: "https://mohammed-irfan.vercel.app/profile.png",
+        url: "https://mohammed-irfan.vercel.app/images/profile.png",
         width: 1200,
         height: 630,
         alt: "Mohammed Irfan Portfolio Preview",
