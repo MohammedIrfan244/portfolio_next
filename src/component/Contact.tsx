@@ -33,10 +33,10 @@ function Contact() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ amount: 0.3 }}
       transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="w-full px-6 py-10 sm:py-16 md:py-24 lg:py-28 md:px-7 lg:px-10 text-white rounded-3xl md:rounded-4xl"
+      className="w-full px-6 py-10 sm:py-16 md:py-24 lg:py-28 md:px-7 space-y-20 md:space-y-24 lg:px-10 text-white rounded-3xl md:rounded-4xl"
     >
       <motion.h1
-        className={`text-[30px] flicker sm:text-[60px] md:text-[90px] lg:text-[120px] text-center ${playfairDisplay.className}`}
+        className={`flicker text-[100px] sm:text-[150px] md:text-[200px] leading-none md:leading-tight text-center ${playfairDisplay.className}`}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -45,7 +45,7 @@ function Contact() {
       </motion.h1>
 
       <motion.div
-        className="mt-6 sm:mt-8 md:mt-10 space-y-4 md:space-y-7 text-center"
+        className="mt-6 sm:mt-8 md:mt-10 space-y-10 sm:space-y-16 md:space-y-20 text-center"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -53,12 +53,12 @@ function Contact() {
         <motion.p
           className={`text-base sm:text-lg md:text-xl lg:text-2xl ${inter.className} font-medium`}
         >
-          Drop a mail at
+          Drop a mail at :
         </motion.p>
 
         <motion.a
           href="mailto:irfanndmb@gmail.com"
-          className={`inline-block text-base sm:text-lg md:text-xl lg:text-xl font-semibold hover:cursor-pointer ${playfairDisplay.className}`}
+          className={`inline-block text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold hover:cursor-pointer ${playfairDisplay.className}`}
           whileHover={{ scale: 1.05 }}
           transition={{ type: 'spring', stiffness: 300 }}
         >
