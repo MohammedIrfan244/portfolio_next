@@ -6,7 +6,7 @@ const projects: IProject[] = [
         id:"1keyone",
         title:"Scopeo Website Monitor",
         image:"/images/monitor.jpg",
-        cover:"/images/monitorcover.jpg",
+        cover:"/images/monitorcover.png",
         github:"https://github.com/scopeo-tech/scopeo-monitor/",
         live:"https://scopeo-monitor.vercel.app/"
     },
