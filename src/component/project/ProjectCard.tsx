@@ -76,7 +76,7 @@ function ProjectCard({ project }: { project: IProject }) {
             }`} />
 
             <div className="absolute inset-0 flex flex-col justify-between p-3 sm:p-4 md:p-5 lg:p-6 z-10">
-                <div className="flex gap-2 sm:gap-3 justify-end">
+                <div className="flex gap-2 sm:gap-3 justify-start">
                     <a
                         href={project.github}
                         target="_blank"

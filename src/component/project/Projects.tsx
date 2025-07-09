@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useCallback, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import type { Variants } from 'framer-motion'
 import { playfairDisplay } from '@/lib/font'
@@ -36,19 +36,20 @@ function Projects() {
   const scrollPrev = () => emblaApi && emblaApi.scrollPrev()
   const scrollNext = () => emblaApi && emblaApi.scrollNext()
   
-  const onSelect = () => {
-    if (!emblaApi) return
-    setPrevBtnEnabled(emblaApi.canScrollPrev())
-    setNextBtnEnabled(emblaApi.canScrollNext())
-  }
+
+const onSelect = useCallback(() => {
+  if (!emblaApi) return
+  setPrevBtnEnabled(emblaApi.canScrollPrev())
+  setNextBtnEnabled(emblaApi.canScrollNext())
+}, [emblaApi])
+
   
   useEffect(() => {
     if (!emblaApi) return
     onSelect()
     emblaApi.on('select', onSelect)
     emblaApi.on('reInit', onSelect)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [emblaApi])
+  }, [emblaApi, onSelect])
   
   useEffect(() => {
     const initLenis = async () => {
