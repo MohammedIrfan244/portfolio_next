@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion, Variants } from 'framer-motion'
 import { playfairDisplay, inter } from '@/lib/font'
+import Image from 'next/image'
 
 
 
@@ -97,19 +98,37 @@ function Profile() {
 
   return (
     <div ref={containerRef} id="profile" className="px-6 md:px-7 lg:px-10 py-10 rounded-3xl md:rounded-4xl w-full bg-white">
-      <motion.h1
-        ref={headingRef}
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        style={{
-          scale: headingScale,
-          transformOrigin: 'left top'
-        }}
-        className={`${playfairDisplay.className} text-[220px] sm:text-[300px] md:text-[350px] text-stone-800 lg:text-[400px]`}
-      >
-        Me.
-      </motion.h1>
+      <div className="flex items-center gap-6 relative">
+  <motion.h1
+    ref={headingRef}
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    style={{
+      scale: headingScale,
+      transformOrigin: 'left top'
+    }}
+    className={`${playfairDisplay.className} text-[220px] sm:text-[300px] md:text-[350px] text-stone-800 lg:text-[400px]`}
+  >
+    Me.
+  </motion.h1>
+
+  <motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 ,delay:0.2}}
+   className="relative w-[100px] sm:w-[140px] md:w-[160px] lg:w-[180px] aspect-square grayscale rounded-full overflow-hidden shadow-md">
+  <Image
+    src="/images/profile.png"
+    alt="Profile"
+    fill
+    className="object-cover"
+    sizes="(max-width: 768px) 100px, (max-width: 1024px) 140px, 180px"
+  />
+</motion.div>
+
+</div>
+
 
       <div className={`${inter.className} text-sm sm:text-base md:text-lg space-y-16 sm:space-y-20 md:space-y-28 pb-6 sm:pb-12 md:pb-16 lg:pb-20`}>
         <motion.div
