@@ -4,9 +4,6 @@ import { motion, Variants } from 'framer-motion'
 import { playfairDisplay, inter } from '@/lib/font'
 import Image from 'next/image'
 
-
-
-
 function Profile() {
   const containerRef = useRef<HTMLDivElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -37,7 +34,6 @@ function Profile() {
 
       setHeadingScale(newScale)
 
-
       const sections: NodeListOf<Element> = container.querySelectorAll('[data-reveal]')
       const newVisibleSections = new Set<string>()
 
@@ -45,7 +41,6 @@ function Profile() {
         const sectionRect: DOMRect = section.getBoundingClientRect()
         const sectionTop: number = sectionRect.top
         const sectionBottom: number = sectionRect.bottom
-
 
         const revealThreshold: number = viewportHeight * 0.8
         const hideThreshold: number = viewportHeight * 0.3
@@ -67,17 +62,14 @@ function Profile() {
       setVisibleSections(newVisibleSections)
     }
 
-
     window.addEventListener('scroll', handleScroll)
-
-
     handleScroll()
-
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [scrollY])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const sectionVariants: Variants = {
     hidden: {
@@ -99,53 +91,55 @@ function Profile() {
   return (
     <div ref={containerRef} id="profile" className="px-6 md:px-7 lg:px-10 py-10 rounded-3xl md:rounded-4xl w-full bg-white">
       <div className="flex items-center gap-6 relative">
-  <motion.h1
-    ref={headingRef}
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    style={{
-      scale: headingScale,
-      transformOrigin: 'left top'
-    }}
-    className={`${playfairDisplay.className} text-[220px] sm:text-[300px] md:text-[350px] text-stone-800 lg:text-[400px]`}
-  >
-    Me.
-  </motion.h1>
+        <motion.h1
+          ref={headingRef}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          style={{
+            scale: headingScale,
+            transformOrigin: 'left top'
+          }}
+          className={`${playfairDisplay.className} text-[220px] sm:text-[300px] md:text-[350px] text-stone-800 lg:text-[400px]`}
+        >
+          Me.
+        </motion.h1>
 
-  <motion.div
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.5 ,delay:0.2 , ease: [0.25, 0.46, 0.45, 0.94]}}
-  style={{
-    scale:headingScale,
-    transformOrigin:'top'
-  }}
-   className="relative hidden md:block md:w-[200px] lg:w-[250px] aspect-square rounded-full overflow-hidden shadow-md">
-  <Image
-    src="/images/profile.png"
-    alt="Profile"
-    fill
-    className="object-cover"
-    sizes="(max-width: 1023px) 160px, 180px"
-  />
-</motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+          style={{
+            scale: headingScale,
+            transformOrigin: 'top'
+          }}
+          className="relative hidden md:block md:w-[200px] lg:w-[250px] aspect-square rounded-full overflow-hidden shadow-md"
+        >
+          <Image
+            src="/images/profile.png"
+            alt="Profile"
+            fill
+            className="object-cover"
+            sizes="(max-width: 1023px) 160px, 180px"
+          />
+        </motion.div>
+      </div>
 
-</div>
       <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.2 , ease:[0.25, 0.46, 0.45, 0.94] }}
-      style={{
-        scale: headingScale,
-        transformOrigin: 'top'
-      }}
-       className='md:hidden m-5 rounded-2xl shadow-xl overflow-hidden'>
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+        style={{
+          scale: headingScale,
+          transformOrigin: 'top'
+        }}
+        className='md:hidden m-5 rounded-2xl shadow-xl overflow-hidden'
+      >
         <Image
-        src="/images/profile.png"
-        alt="Profile"
-        width={300}
-        height={300}
+          src="/images/profile.png"
+          alt="Profile"
+          width={300}
+          height={300}
         />
       </motion.div>
 
@@ -187,9 +181,8 @@ function Profile() {
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-cyan-800 mx-0.5">Redux </span> {' '}
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-800 mx-0.5">Zustand</span> and{' '}
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 mx-0.5">Tailwind CSS</span>{' '}
-            to ship production-ready projects. Several of my builds (which you might’ve already seen) demonstrate how I apply these technologies to deliver scalable, maintainable results.
+            to ship production-ready projects. Several of my builds (which you might&apos;ve already seen) demonstrate how I apply these technologies to deliver scalable, maintainable results.
           </p>
-
         </motion.div>
 
         <motion.div

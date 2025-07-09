@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import Lenis from 'lenis'
 import { playfairDisplay, inter } from '@/lib/font'
+import { FiPhoneCall , FiGithub , FiLinkedin } from "react-icons/fi";
 
 function Contact() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -55,7 +56,7 @@ function Contact() {
         >
           Drop a mail at :
         </motion.p>
-
+        <div className='space-y-8 md:space-y-12'>
         <motion.a
           href="mailto:irfanndmb@gmail.com"
           className={`inline-block text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold hover:cursor-pointer ${playfairDisplay.className}`}
@@ -64,7 +65,18 @@ function Contact() {
         >
           irfanndmb@gmail.com
         </motion.a>
+        <div className='w-full flex items-center justify-center gap-4 sm:gap-8 md:gap-12'>
+          <a target='_blank' href="tel:+918891555811" className='flex font-semibold items-center gap-2 rounded-2xl py-1.5 px-3 hover:scale-[1.02] text-sm bg-green-900 hover:bg-green-800'><FiPhoneCall className='w-3 h-3 stroke-3' /> +91 889155 5811</a>
+          <a target='_blank' href='https://github.com/MohammedIrfan244' className='p-2 rounded-full hover:scale-105 bg-stone-900 hover:bg-stone-800' ><FiGithub /></a>
+          <a target='_blank' href='https://www.linkedin.com/in/mohammed-irfan-n' className='p-2 rounded-full hover:scale-105 bg-blue-900 hover:bg-blue-700' ><FiLinkedin /></a>
+        </div>
+        </div>
       </motion.div>
+      <motion.p
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.8 , ease:"easeOut" }}
+       className={`text-xs sm:text-sm md:text-base lg:text-lg text-center pt-10 sm:pt-12 md:pt-14 lg:pt-16 ${playfairDisplay.className}`}>Thank you for checking out</motion.p>
     </motion.div>
   )
 }
