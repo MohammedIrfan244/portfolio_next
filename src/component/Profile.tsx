@@ -116,21 +116,40 @@ function Profile() {
   <motion.div
   initial={{ opacity: 0, y: 40 }}
   whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.5 ,delay:0.2}}
-   className="relative w-[100px] sm:w-[140px] md:w-[160px] lg:w-[180px] aspect-square grayscale rounded-full overflow-hidden shadow-md">
+  transition={{ duration: 0.5 ,delay:0.2 , ease: [0.25, 0.46, 0.45, 0.94]}}
+  style={{
+    scale:headingScale,
+    transformOrigin:'top'
+  }}
+   className="relative hidden md:block md:w-[200px] lg:w-[250px] aspect-square rounded-full overflow-hidden shadow-md">
   <Image
     src="/images/profile.png"
     alt="Profile"
     fill
     className="object-cover"
-    sizes="(max-width: 768px) 100px, (max-width: 1024px) 140px, 180px"
+    sizes="(max-width: 1023px) 160px, 180px"
   />
 </motion.div>
 
 </div>
+      <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 , ease:[0.25, 0.46, 0.45, 0.94] }}
+      style={{
+        scale: headingScale,
+        transformOrigin: 'top'
+      }}
+       className='md:hidden m-5 rounded-2xl shadow-xl overflow-hidden'>
+        <Image
+        src="/images/profile.png"
+        alt="Profile"
+        width={300}
+        height={300}
+        />
+      </motion.div>
 
-
-      <div className={`${inter.className} text-sm sm:text-base md:text-lg space-y-16 sm:space-y-20 md:space-y-28 pb-6 sm:pb-12 md:pb-16 lg:pb-20`}>
+      <div className={`${inter.className} text-sm sm:text-base md:text-lg space-y-16 sm:space-y-20 md:space-y-28 py-6 sm:py-12 md:pb-16 lg:pb-20`}>
         <motion.div
           data-reveal="whoami"
           className="space-y-4 md:space-y-7"
@@ -139,7 +158,7 @@ function Profile() {
           animate={visibleSections.has('whoami') ? 'visible' : 'hidden'}
         >
           <h3 className="font-semibold text-stone-700">Who Am I</h3>
-          <p className='text-xs sm:text-sm leading-relaxed md:leading-loose text-stone-600 font-semibold md:text-base'>
+          <p className='text-xs sm:text-sm leading-loose text-stone-600 font-semibold md:text-base'>
             I&apos;m Mohammed Irfan, from Malappuram, Kerala. I graduated in Mathematics from the University of Calicut
             and transitioned into web development. I&apos;ve completed an internship at Bridgeon Solutions, contributing
             to a couple of real-world projects using the MERN stack.
@@ -154,7 +173,7 @@ function Profile() {
           animate={visibleSections.has('whatido') ? 'visible' : 'hidden'}
         >
           <h3 className="font-semibold text-stone-700">What I Do</h3>
-          <p className='text-xs sm:text-sm text-stone-600 font-semibold md:text-base leading-relaxed md:leading-loose'>
+          <p className='text-xs sm:text-sm text-stone-600 font-semibold md:text-base leading-loose'>
             I build full-stack web applications — both frontend and backend. While I enjoy all aspects of development,
             I&apos;m especially drawn to backend logic. I work with{' '}
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-orange-800 mx-0.5">JavaScript</span>{' '}
@@ -165,7 +184,7 @@ function Profile() {
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 mx-0.5">Express.js</span>{' '}
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 mx-0.5">MongoDB</span>, and tools like{' '}
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-fuchsia-800 mx-0.5">Git </span>  {' '}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-cyan-800 mx-0.5">Redux , </span> {' '}
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-cyan-800 mx-0.5">Redux </span> {' '}
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-800 mx-0.5">Zustand</span> and{' '}
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 mx-0.5">Tailwind CSS</span>{' '}
             to ship production-ready projects. Several of my builds (which you might’ve already seen) demonstrate how I apply these technologies to deliver scalable, maintainable results.
@@ -183,7 +202,7 @@ function Profile() {
           <h3 className="font-semibold text-stone-700">
             Outside the Terminal <span className="italic text-sm text-stone-500">(not relevant)</span>
           </h3>
-          <p className='text-xs sm:text-sm text-stone-600 font-semibold md:text-base leading-relaxed md:leading-loose'>
+          <p className='text-xs sm:text-sm text-stone-600 font-semibold md:text-base leading-loose'>
             Outside of work, I don&apos;t have a fixed hobby — but music is always on, even when I&apos;m coding. I also enjoy
             sketching people and scenes in pencil. I&apos;m no artist, but the pencil doesn&apos;t mind.
           </p>

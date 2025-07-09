@@ -4,6 +4,7 @@ import { playfairDisplay } from '@/lib/font'
 import { IProject } from '@/lib/types'
 import Image from 'next/image'
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
+import {motion} from 'framer-motion'
 
 function ProjectCard({ project }: { project: IProject }) {
     const [isPressed, setIsPressed] = useState(false)
@@ -34,8 +35,11 @@ function ProjectCard({ project }: { project: IProject }) {
     }
 
     return (
-        <div 
-            className={`${playfairDisplay.className} w-[400px] select-none sm:w-[450px] md:w-[500px] lg:w-[550px] h-[500px] sm:h-[450px] md:h-[400px] lg:h-[450px] overflow-hidden relative rounded-lg group cursor-pointer transition-shadow duration-300`}
+        <motion.div 
+        initial ={{opacity:0}}
+        whileInView={{opacity:1}}
+        transition={{duration:0.5,ease:'easeIn'}}
+            className={`${playfairDisplay.className} w-[400px] select-none sm:w-[450px] md:w-[500px] lg:w-[550px] h-[500px] sm:h-[450px] md:h-[400px] lg:h-[450px] overflow-hidden relative rounded-lg group transition-shadow duration-300`}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
         >
@@ -77,7 +81,7 @@ function ProjectCard({ project }: { project: IProject }) {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
+                        className="p-2 hover:cursor-pointer bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
                     >
                         <FiGithub className="w-3 h-3 text-white" />
                     </a>
@@ -85,7 +89,7 @@ function ProjectCard({ project }: { project: IProject }) {
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
+                        className="p-2 hover:cursor-pointer bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
                     >
                         <FiExternalLink className="w-3 h-3 text-white" />
                     </a>
@@ -97,7 +101,7 @@ function ProjectCard({ project }: { project: IProject }) {
                     </h3>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
