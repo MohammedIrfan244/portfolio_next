@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Mohammed Irfan – MERN Stack Developer | Full Stack JavaScript Engineer Portfolio",
-  description: "Mohammed Irfan is a professional MERN Stack Developer with expertise in React, Node.js, MongoDB, and Express.js. View my projects, skills, and experience in building scalable web applications. Available for freelance work and full-time opportunities.",
+  description: "Hi, I'm Mohammed Irfan, a professional MERN Stack Developer. I specialize in building full-stack web applications using React, Node.js, MongoDB, and Express.js. Explore my portfolio to see the projects I’ve built, the problems I solve, and how I can help bring scalable digital solutions to life. I'm currently open to freelance gigs and full-time roles.",
   keywords: [
     "Mohammed Irfan",
     "Mohammed Irfan Portfolio",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Mohammed Irfan – Professional MERN Stack Developer Portfolio",
-    description: "Explore Mohammed Irfan's portfolio featuring MERN stack projects, technical skills, and professional experience. Specializing in React, Node.js, MongoDB, and Express.js development.",
+    description: "Hi, I'm Mohammed Irfan, a professional MERN Stack Developer. I specialize in building full-stack web applications using React, Node.js, MongoDB, and Express.js. Explore my portfolio to see the projects I’ve built, the problems I solve, and how I can help bring scalable digital solutions to life. I'm currently open to freelance gigs and full-time roles.",
     url: "https://mohammed-irfan.vercel.app",
     siteName: "Mohammed Irfan Portfolio",
     images: [
@@ -88,7 +88,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Mohammed Irfan – MERN Stack Developer Portfolio",
-    description: "Professional MERN Stack Developer specializing in React, Node.js, MongoDB & Express.js. Check out my projects and get in touch!",
+    description: "Hi, I'm Mohammed Irfan, a professional MERN Stack Developer. I specialize in building full-stack web applications using React, Node.js, MongoDB, and Express.js. Explore my portfolio to see the projects I’ve built, the problems I solve, and how I can help bring scalable digital solutions to life. I'm currently open to freelance gigs and full-time roles.",
     images: ["https://mohammed-irfan.vercel.app/images/profile.png"],
   },
   verification: {
@@ -128,6 +128,7 @@ export default function RootLayout({
         <meta name="google-site-verification" content="dWv250TjsDYBXWhQVgmudpB-oGlTqk8Ipl7KUeRwYDY" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+        <link rel="icon" href="/images/favicon-32x32.png" sizes="32x32" type="image/png" />
         
         <script
           type="application/ld+json"
@@ -138,7 +139,7 @@ export default function RootLayout({
               "name": "Mohammed Irfan",
               "alternateName": "zemdev",
               "jobTitle": "MERN Stack Developer",
-              "description": "Professional MERN Stack Developer specializing in React, Node.js, MongoDB, and Express.js",
+              "description": "Hi, I'm Mohammed Irfan, a professional MERN Stack Developer. I specialize in building full-stack web applications using React, Node.js, MongoDB, and Express.js. Explore my portfolio to see the projects I’ve built, the problems I solve, and how I can help bring scalable digital solutions to life. I'm currently open to freelance gigs and full-time roles.",
               "url": "https://mohammed-irfan.vercel.app",
               "image": "https://mohammed-irfan.vercel.app/images/profile.png",
               "sameAs": [
