@@ -30,7 +30,7 @@ function ProjectCard({ project }: { project: IProject }) {
 
     const handleTouchEnd = () => {
         if (isMobile) {
-            setTimeout(() => setIsPressed(false), 2000) 
+            setTimeout(() => setIsPressed(false), 6000) 
         }
     }
 
@@ -61,11 +61,13 @@ function ProjectCard({ project }: { project: IProject }) {
                     ? (isPressed ? 'opacity-100 scale-110' : 'opacity-0 scale-100')
                     : 'opacity-0 group-hover:opacity-100 group-hover:scale-110'
             }`}>
-                <Image
-                    src={project.image}
-                    alt={`${project.title} preview`}
-                    fill
-                    className="object-cover"
+                <video
+                    src={project.video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
                 />
             </div>
 

@@ -68,7 +68,7 @@ function Profile() {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const sectionVariants: Variants = {
@@ -153,9 +153,9 @@ function Profile() {
         >
           <h3 className="font-semibold text-stone-700">Who Am I</h3>
           <p className='text-xs sm:text-sm leading-loose text-stone-600 font-semibold md:text-base'>
-            I&apos;m Mohammed Irfan, from Malappuram, Kerala. I graduated in Mathematics from the University of Calicut
-            and transitioned into web development. I&apos;ve completed an internship at Bridgeon Solutions, contributing
-            to a couple of real-world projects using the MERN stack.
+            I&apos;m Mohammed Irfan, from Malappuram, Kerala. I graduated in Mathematics from the University of Calicut and transitioned into web development through self-learning and hands-on experience.
+            I completed a 1-year internship at Bridgeon Solutions, where I contributed to production-grade MERN stack projects in an agile team setup.
+            Currently, I’m focused on building advanced full-stack applications, refining my backend skills, and preparing for engineering roles in high-impact environments.
           </p>
         </motion.div>
 
@@ -181,7 +181,7 @@ function Profile() {
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-cyan-800 mx-0.5">Redux </span> {' '}
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-800 mx-0.5">Zustand</span> and{' '}
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 mx-0.5">Tailwind CSS</span>{' '}
-            to ship production-ready projects. Several of my builds (which you might&apos;ve already seen) demonstrate how I apply these technologies to deliver scalable, maintainable results.
+            to ship production-ready projects. Several of my builds (which you might&apos;ve seen above) demonstrate how I apply these technologies to deliver scalable, maintainable results.
           </p>
         </motion.div>
 
@@ -196,7 +196,7 @@ function Profile() {
             Outside the Terminal <span className="italic text-sm text-stone-500">(not relevant)</span>
           </h3>
           <p className='text-xs sm:text-sm text-stone-600 font-semibold md:text-base leading-loose'>
-            Outside of work, I don&apos;t have a fixed hobby — but music is always on, even when I&apos;m coding. I also enjoy
+            Outside of work, I don&apos;t have a fixed hobby — but music is always on, even when I&apos;m coding. I also like to read books and enjoy
             sketching people and scenes in pencil. I&apos;m no artist, but the pencil doesn&apos;t mind.
           </p>
         </motion.div>

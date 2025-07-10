@@ -5,7 +5,7 @@ const projects: IProject[] = [
     {
         id:"1keyone",
         title:"Scopeo Website Monitor",
-        image:"/images/monitor.jpg",
+        video:"/videos/scopeo.mp4",
         cover:"/images/monitorcover.png",
         github:"https://github.com/scopeo-tech/scopeo-monitor/",
         live:"https://scopeo-monitor.vercel.app/"
@@ -13,7 +13,7 @@ const projects: IProject[] = [
     {
         id:"2keytwo",
         title:"Pymedaca - The Digital Classroom",
-        image:"/images/pymedaca.png",
+        video:"/videos/pymedaca.mp4",
         cover:"/images/pymedacacover.jpg",
         github:"https://github.com/MohammedIrfan244/pymedaca_client",
         live:"https://pymedaca-client.vercel.app/"
@@ -21,7 +21,7 @@ const projects: IProject[] = [
     {
         id:"4keyfour",
         title:"Instagam Clone",
-        image:"/images/instagram.png",
+        video:"/videos/instagram.mp4",
         cover:"/images/instagramcover.jpg",
         github:"https://github.com/MohammedIrfan244/instagram_clone/",
         live:"https://instagram-clone-z.vercel.app/"
@@ -29,7 +29,7 @@ const projects: IProject[] = [
     {
         id:"5keyfive",
         title:"Aura Fashion Blog",
-        image:"/images/aura.png",
+        video:"/videos/aura.mp4",
         cover:"/images/auracover.jpg",
         github:"https://github.com/MOhammedIrfan244/aura-fashion-blog/",
         live:"https://aura-fashion-blog.vercel.app/"

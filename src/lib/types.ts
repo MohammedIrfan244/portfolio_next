@@ -7,7 +7,7 @@ export interface INavigation {
 export interface IProject {
   id: string;
   title: string;
-  image: string;
+  video: string;
   cover: string;
   github: string;
   live: string;
