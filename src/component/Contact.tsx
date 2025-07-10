@@ -66,10 +66,10 @@ function Contact() {
           irfanndmb@gmail.com
         </motion.a>
         <div className='w-full flex items-center justify-center gap-4 sm:gap-8 md:gap-12'>
-          <a target='_blank' href="tel:+918891555811" className='flex font-semibold items-center gap-2 rounded-2xl py-1.5 px-3 hover:scale-[1.02] text-sm bg-green-900 hover:bg-green-800'><FiPhoneCall className='w-3 h-3 stroke-3' /> +91 889155 5811</a>
-          <a target='_blank' href='https://github.com/MohammedIrfan244' className='p-2 rounded-full hover:scale-105 bg-stone-900 hover:bg-stone-800' ><FiGithub /></a>
-          <a target='_blank' href='https://www.linkedin.com/in/mohammed-irfan-n' className='p-2 rounded-full hover:scale-105 bg-blue-900 hover:bg-blue-700' ><FiLinkedin /></a>
-          <a target='_blank' href='/files/MohammedIrfan.pdf' title='Download My Resume' download={true} className='p-2 rounded-full hover:scale-105 bg-teal-900 hover:bg-teal-700' ><FiDownload /></a>
+          <a target='_blank' href="tel:+918891555811" className='flex font-semibold transition-all duration-300 ease-out items-center gap-2 rounded-2xl py-1.5 px-3 hover:scale-[1.02] text-sm bg-green-900 hover:bg-green-800'><FiPhoneCall className='w-3 h-3 stroke-3' /> +91 889155 5811</a>
+          <a target='_blank' href='https://github.com/MohammedIrfan244' className='p-2 rounded-full hover:scale-105 transition-all duration-300 ease-out bg-stone-900 hover:bg-stone-800' ><FiGithub /></a>
+          <a target='_blank' href='https://www.linkedin.com/in/mohammed-irfan-n' className='p-2 rounded-full transition-all duration-300 ease-out hover:scale-105 bg-blue-900 hover:bg-blue-700' ><FiLinkedin /></a>
+          <a target='_blank' href='/files/MohammedIrfan.pdf' title='Download My Resume' download={true} className='p-2 rounded-full transition-all duration-300 ease-out hover:scale-105 bg-teal-900 hover:bg-teal-700' ><FiDownload /></a>
         </div>
         </div>
       </motion.div>
