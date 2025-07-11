@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import { playfairDisplay } from '@/lib/font'
+import { playfairDisplay , inter } from '@/lib/font'
 import { IProject } from '@/lib/types'
 import Image from 'next/image'
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
@@ -11,7 +11,6 @@ function ProjectCard({ project }: { project: IProject }) {
     const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
-        
         const checkMobile = () => {
             setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window)
         }
@@ -98,9 +97,20 @@ function ProjectCard({ project }: { project: IProject }) {
                 </div>
 
                 <div className="flex-1 flex items-end">
-                    <h3 className="text-white text-sm md:text-base font-thin transform transition-transform duration-300 group-hover:translate-y-[-4px]">
+                    <div className='text-white space-y-2 sm:space-y-2.5 md:space-y-3 lg:space-y-3'>
+                    <h3 className="text-sm md:text-base font-thin transform transition-transform duration-300 group-hover:translate-y-[-4px]">
                         {project.title}
                     </h3>
+                    <div className='flex text-xs gap-2 font-thin sm:gap-3 md:gap-4 lg:gap-5'>
+                        {project.dep.map((tech,index)=>{
+                            return <motion.p
+                            initial={{opacity:0,y:10}}
+                            whileInView={{opacity:1,y:0}}
+                            transition={{duration:0.4,delay:index*0.1,ease:'backIn'}}
+                             className={`py-1 px-2 rounded-xl ${tech.color} ${inter.className}`} key={tech.id}>{tech.tool}</motion.p>
+                        })}
+                    </div>
+                    </div>
                 </div>
             </div>
         </motion.div>
