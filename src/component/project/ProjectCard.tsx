@@ -101,7 +101,7 @@ function ProjectCard({ project }: { project: IProject }) {
                     <h3 className="text-sm md:text-base font-thin transform transition-transform duration-300 group-hover:translate-y-[-4px]">
                         {project.title}
                     </h3>
-                    <div className='flex text-xs gap-2 font-thin sm:gap-3 md:gap-4 lg:gap-5'>
+                    <div className='flex text-xs gap-2 font-thin sm:gap-3 md:gap-4 lg:gap-5 flex-wrap'>
                         {project.dep.map((tech,index)=>{
                             return <motion.p
                             initial={{opacity:0,y:10}}

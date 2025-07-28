@@ -153,10 +153,10 @@ function Profile() {
         >
           <h3 className="font-semibold text-stone-700">Who Am I</h3>
           <p className='text-xs sm:text-sm leading-loose text-stone-600 font-semibold md:text-base'>
-            I&apos;m Mohammed Irfan, from Malappuram, Kerala. I graduated in Mathematics from the University of Calicut and transitioned into web development through self-learning and hands-on experience.
-            I completed a 1-year internship at Bridgeon Solutions, where I contributed to production-grade MERN stack projects in an agile team setup.
-            Currently, I’m focused on building advanced full-stack applications, refining my backend skills, and preparing for engineering roles in high-impact environments.
-          </p>
+  I&apos;m <span className="font-bold text-black">Mohammed Irfan</span>, from <span className="font-bold text-black">Malappuram, Kerala, India</span>. I graduated in <span className="font-bold text-black">Mathematics</span> from the University of Calicut and transitioned into <span className="font-bold text-black">web development</span> through self-learning and hands-on experience.
+  I completed a <span className="font-bold text-black">1-year internship at Bridgeon Solutions</span>, where I contributed to production-grade <span className="font-bold text-black">MERN stack</span> projects in an <span className="font-bold text-black">agile team setup</span>.
+  Currently, I’m focused on building advanced full-stack applications, refining my backend skills, and preparing for engineering roles in high-impact environments.
+</p>
         </motion.div>
 
         <motion.div
