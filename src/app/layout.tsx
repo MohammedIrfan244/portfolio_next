@@ -94,10 +94,7 @@ export const metadata: Metadata = {
   verification: {
     google: "dWv250TjsDYBXWhQVgmudpB-oGlTqk8Ipl7KUeRwYDY",
   },
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-  ],
+  // themeColor moved to viewport export below
   manifest: "/site.webmanifest",
   icons: {
     icon: [
@@ -118,6 +115,13 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -130,6 +134,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <link rel="icon" href="/images/favicon-32x32.png" sizes="32x32" type="image/png" />
+        <link rel="image_src" href="/images/profile.png" />
         
         <script
           type="application/ld+json"

@@ -36,3 +36,35 @@ body{
   animation: flicker 4.5s infinite;
 }
 
+.magnetic-cursor {
+  --circle-size: 50px;
+  position: fixed;
+  height: var(--circle-size);
+  width: var(--circle-size);
+  background: white; /* base color */
+  border-radius: 50%;
+  top: calc(var(--circle-size) / 2 * -1);
+  left: calc(var(--circle-size) / 2 * -1);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+}
+
+.magnetic-cursor {
+  box-shadow: 0 0 12px rgba(255,255,255,0.25);
+}
+
+body {
+  background: #050908;
+}
+
+body {
+  cursor: none;
+}
+
+.invert-blend {
+  color: white;
+  mix-blend-mode: difference;
+  position: relative;
+  z-index: 2;
+}

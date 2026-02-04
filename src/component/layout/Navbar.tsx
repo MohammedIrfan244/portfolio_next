@@ -34,7 +34,7 @@ function Navbar() {
       transition={{ duration: 0.5 }}
       href='#'
       onClick={(e) => handleSmoothScroll(e, 'top')}
-       className='text-lg tracking-tighter hover:cursor-pointer'>Irfan</motion.a>
+       className='text-lg tracking-tighter cursor-none'>Irfan</motion.a>
       <div className='flex gap-3 md:gap-5 lg:gap-6 text-base'>
         <motion.a
         initial={{ opacity: 0, y: -20 }}
@@ -42,21 +42,21 @@ function Navbar() {
         transition={{ duration: 0.5, delay: 0.1 }}
         href='#projects'
         onClick={(e) => handleSmoothScroll(e, '#projects')}
-         className='text-sm hover:cursor-pointer'>Work</motion.a>
+         className='text-sm cursor-none'>Work</motion.a>
         <motion.a
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
         href='#profile'
         onClick={(e) => handleSmoothScroll(e, '#profile')}
-         className='text-sm hover:cursor-pointer'>About</motion.a>
+         className='text-sm cursor-none'>About</motion.a>
         <motion.a
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
         href='#contact'
         onClick={(e) => handleSmoothScroll(e, '#contact')}
-         className='text-sm hover:cursor-pointer'>Contact</motion.a>
+         className='text-sm cursor-none'>Contact</motion.a>
       </div>
     </motion.div>
   )

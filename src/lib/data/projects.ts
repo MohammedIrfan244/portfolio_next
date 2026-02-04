@@ -19,16 +19,16 @@ const projects: IProject[] = [
   },
   {
     id: "2keytwo",
-    title: "Pymedaca - The Digital Classroom",
-    video: "/videos/pymedaca.mp4",
-    cover: "/images/pymedacacover.jpg",
+    title: "DURIO - Your Personal daily planner ( In Progress )",
+    video: "/videos/durio.mp4",
+    cover: "/images/durio.png",
     dep: [
-      { id: "7", tool: "Express", color: "bg-gray-900" },
       { id: "8", tool: "Next.js", color: "bg-blue-900" },
+      { id: "7", tool: "Prisma", color: "bg-gray-900" },
       { id: "9", tool: "MongoDb", color: "bg-emerald-900" }
     ],
-    github: "https://github.com/MohammedIrfan244/pymedaca_client",
-    live: "https://pymedaca-client.vercel.app/"
+    github: "https://github.com/MohammedIrfan244/to-do-app/",
+    live: "https://durio.vercel.app/"
   },
   {
     id: "4keyfour",

@@ -59,7 +59,7 @@ function Contact() {
         <div className='space-y-8 md:space-y-12'>
         <motion.a
           href="mailto:irfanndmb@gmail.com"
-          className={`inline-block text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold hover:cursor-pointer ${playfairDisplay.className}`}
+          className={`inline-block text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold ${playfairDisplay.className}`}
           whileHover={{ scale: 1.05 }}
           transition={{ type: 'spring', stiffness: 300 }}
         >

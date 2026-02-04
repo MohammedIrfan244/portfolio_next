@@ -82,7 +82,7 @@ function ProjectCard({ project }: { project: IProject }) {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 hover:cursor-pointer bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
+                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
                     >
                         <FiGithub className="w-3 h-3 text-white" />
                     </a>
@@ -90,7 +90,7 @@ function ProjectCard({ project }: { project: IProject }) {
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 hover:cursor-pointer bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
+                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
                     >
                         <FiExternalLink className="w-3 h-3 text-white" />
                     </a>
