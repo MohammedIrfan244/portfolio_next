@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://mohammed-irfan.vercel.app
+
+# Sitemaps
+Sitemap: https://mohammed-irfan.vercel.app/sitemap.xml
