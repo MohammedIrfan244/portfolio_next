@@ -12,6 +12,7 @@ function Hero() {
   })
 
 
+  const name = "Mohammed Irfan"
   const roleIndex = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8, 1], [0, 1, 2, 3, 4, 5])
 
   const roles = [
@@ -133,14 +134,31 @@ function Hero() {
             Hello, I am
           </motion.p>
           
-          <motion.h1 
-            className={`${playfairDisplay.className} text-4xl sm:text-5xl md:text-6xl text-stone-800 font-bold`}
-            variants={itemVariants}
-            whileHover={{ scale: 1.02 }}
-            transition={{ duration: 0.3 }}
-          >
-            Mohammed Irfan
-          </motion.h1>
+          <motion.h1
+  className={`${playfairDisplay.className} text-4xl sm:text-5xl md:text-6xl text-stone-800 font-bold flex flex-wrap justify-center`}
+  variants={itemVariants}
+>
+  {name.split("").map((char, i) => (
+    <motion.span
+      key={i}
+      className="inline-block cursor-default"
+      whileHover={{
+        scale: 1.6,
+        y: -4,
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 300,
+        damping: 15,
+      }}
+      style={{
+        marginRight: char === " " ? "0.5rem" : "0.02em",
+      }}
+    >
+      {char === " " ? "\u00A0" : char}
+    </motion.span>
+  ))}
+</motion.h1>
         </motion.div>
       </div>
 

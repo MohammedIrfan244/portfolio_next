@@ -112,7 +112,7 @@ export default function UltraFluidCursor() {
       {/* Main fluid blob */}
       <div 
         ref={circleRef} 
-        className="blob-cursor fixed top-0 left-0 w-12 h-12 bg-white pointer-events-none mix-blend-difference z-50"
+        className="blob-cursor hidden md:inline-block fixed top-0 left-0 w-12 h-12 bg-white pointer-events-none mix-blend-difference z-50"
         style={{ 
           willChange: "transform",
           filter: "blur(1px)",
@@ -122,7 +122,7 @@ export default function UltraFluidCursor() {
       {/* Small dot at actual cursor position */}
       <div 
         ref={dotRef} 
-        className="fixed top-0 left-0 w-3 h-3 bg-white rounded-full pointer-events-none mix-blend-difference z-[51]"
+        className="fixed top-0 hidden md:inline-block left-0 w-3 h-3 bg-white rounded-full pointer-events-none mix-blend-difference z-[51]"
         style={{ 
           willChange: "transform",
           boxShadow: "0 0 4px rgba(255,255,255,0.8)"

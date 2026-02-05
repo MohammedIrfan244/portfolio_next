@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { playfairDisplay, inter } from "@/lib/font";
-import Image from "next/image";
 
 function Profile() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -34,11 +33,11 @@ function Profile() {
         0,
         -headingTop / (headingHeight + viewportHeight * 0.5),
       );
-      const minScale = 0.3;
-      const maxScale = 1;
-      const newScale = Math.max(
-        minScale,
-        maxScale - scrollProgress * (maxScale - minScale),
+      const minScale = 1;
+      const maxScale = 2;
+      const newScale = Math.min(
+        maxScale,
+        minScale + scrollProgress * (maxScale - minScale),
       );
 
       setHeadingScale(newScale);
@@ -104,12 +103,13 @@ function Profile() {
       id="profile"
       className="px-6 md:px-7 lg:px-10 py-10 rounded-3xl md:rounded-4xl w-full bg-white"
     >
-      <div>
+      <div className="w-full overflow-x-hidden hide-scrollbar">
         <motion.h3
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className={`${playfairDisplay.className} text-xl sm:text-2xl md:text-3xl lg:text-4xl text-stone-600 font-bold`}
+          className={`${playfairDisplay.className} text-[50px] sm:text-[70px] md:text-[90px] lg:text-[100px]
+    text-stone-800 font-bold px-3`}
         >
           About
         </motion.h3>
@@ -118,7 +118,7 @@ function Profile() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          style={{ scale: headingScale, transformOrigin: "left top" }}
+          style={{ scale: headingScale, transformOrigin: "left bottom" }}
           className={`${playfairDisplay.className}
     text-[220px] sm:text-[300px] md:text-[350px] lg:text-[400px]
     text-stone-800
@@ -129,29 +129,6 @@ function Profile() {
           Me.
         </motion.h1>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.5,
-          delay: 0.2,
-          ease: [0.25, 0.46, 0.45, 0.94],
-        }}
-        style={{
-          scale: headingScale,
-          transformOrigin: "top",
-        }}
-        className="md:hidden m-5 rounded-2xl shadow-xl overflow-hidden"
-      >
-        <Image
-          src="/images/profile.png"
-          alt="Profile"
-          width={300}
-          height={300}
-        />
-      </motion.div>
-
       <div
         className={`${inter.className} text-sm sm:text-base md:text-lg space-y-16 sm:space-y-20 md:space-y-28 py-6 sm:py-12 md:pb-16 lg:pb-20`}
       >
@@ -174,7 +151,6 @@ function Profile() {
             University of Calicut and transitioned into{" "}
             <span className="font-bold text-black">web development</span>{" "}
             through self-learning and hands-on experience.
-            <br />
             <br />I completed a{" "}
             <span className="font-bold text-black">
               1-year internship at BridgeOn
@@ -196,7 +172,6 @@ function Profile() {
               Next.js, TypeScript, Node.js, MongoDB, and Prisma
             </span>
             .
-            <br />
             <br />
             I’m focused on building scalable full-stack applications, deepening
             my backend expertise, and preparing for engineering roles in
@@ -237,6 +212,7 @@ function Profile() {
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 mx-0.5">
               MongoDB
             </span>
+            , <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-violet-100 text-violet-800 mx-0.5">Prisma</span>,
             , and tools like{" "}
             <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-fuchsia-800 mx-0.5">
               Git{" "}
