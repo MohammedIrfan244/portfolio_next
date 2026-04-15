@@ -63,7 +63,7 @@ function Navbar() {
               transition={{ duration: 0.5, delay: item.delay }}
               href={item.href}
               onClick={(e) => handleSmoothScroll(e, item.href)}
-              className="text-sm cursor-none relative z-10 px-4 py-1 rounded-xl overflow-hidden"
+              className="text-sm cursor-none relative z-10 px-4 py-1 rounded-xl text-slate-600 overflow-hidden"
             >
               {item.label}
             </motion.a>
