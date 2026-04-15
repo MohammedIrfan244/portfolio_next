@@ -43,7 +43,7 @@ function Navbar() {
           transition={{ duration: 0.5 }}
           href="#"
           onClick={(e) => handleSmoothScroll(e, "top")}
-          className="text-lg tracking-tighter cursor-none relative px-4 py-1 rounded-xl overflow-hidden"
+          className="text-lg tracking-tighter cursor-none text-gray-500 relative px-4 py-1 rounded-xl overflow-hidden"
         >
           Irfan
         </motion.a>
@@ -63,7 +63,7 @@ function Navbar() {
               transition={{ duration: 0.5, delay: item.delay }}
               href={item.href}
               onClick={(e) => handleSmoothScroll(e, item.href)}
-              className="text-sm cursor-none relative z-10 px-4 py-1 rounded-xl text-slate-600 overflow-hidden"
+              className="text-sm cursor-none relative z-10 px-4 py-1 rounded-xl text-gray-500 overflow-hidden"
             >
               {item.label}
             </motion.a>
