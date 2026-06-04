@@ -3,7 +3,7 @@ import { IProject } from "../types"
 const projects: IProject[] = [
   {
     id: "1keyone",
-    title: "Scopeo Website Monitor",
+    title: "Scopeo Website Monitor (Code Base and SDK)",
     video: "/videos/scopeo.mp4",
     cover: "/images/monitorcover.png",
     dep: [
@@ -15,7 +15,7 @@ const projects: IProject[] = [
       { id: "6", tool: "Npm", color: "bg-red-900" },
     ],
     github: "https://github.com/scopeo-tech/scopeo-monitor/",
-    live: "https://scopeo-monitor.vercel.app/"
+    live: "https://github.com/scopeo-tech/scopeo-monitor/"
   },
   {
     id: "2keytwo",
