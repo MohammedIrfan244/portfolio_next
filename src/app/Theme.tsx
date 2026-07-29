@@ -5,6 +5,7 @@ import MagneticCursor from "@/component/layout/MagneticCursor";
 import Navbar from "@/component/layout/Navbar";
 import Profile from "@/component/Profile";
 import Projects from "@/component/project/Projects";
+import Experience from "@/component/Experience";
 import { useLenisScroll } from "@/lib/hooks/useLenisScroll";
 import React from "react";
 
@@ -17,6 +18,7 @@ function Theme() {
       <Hero />
       <Projects />
       <Profile />
+      <Experience />
       <Contact />
     </>
   );
