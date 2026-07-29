@@ -159,6 +159,12 @@ function Hero() {
     </motion.span>
   ))}
 </motion.h1>
+          <motion.p
+            className={`${inter.className} text-sm sm:text-base md:text-lg text-stone-500 font-semibold mt-2 sm:mt-4`}
+            variants={itemVariants}
+          >
+            A full-stack developer
+          </motion.p>
         </motion.div>
       </div>
 

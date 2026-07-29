@@ -188,40 +188,40 @@ function Profile() {
             I build full-stack web applications — both frontend and backend.
             While I enjoy all aspects of development, I&apos;m especially drawn
             to backend logic. I work with{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-orange-800 mx-0.5">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-purple-100 text-orange-800 mx-0.5">
               JavaScript
             </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 mx-0.5">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-purple-100 text-purple-800 mx-0.5">
               TypeScript
             </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mx-0.5">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-blue-100 text-blue-800 mx-0.5">
               React
             </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 mx-0.5">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-gray-100 text-gray-800 mx-0.5">
               Next.js
             </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 mx-0.5">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-green-100 text-green-800 mx-0.5">
               Node.js
             </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 mx-0.5">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-yellow-100 text-yellow-800 mx-0.5">
               Express.js
             </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 mx-0.5">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-emerald-100 text-emerald-800 mx-0.5">
               MongoDB
             </span>
-            , <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-violet-100 text-violet-800 mx-0.5">Prisma</span>,
+            , <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-violet-100 text-violet-800 mx-0.5">Prisma</span>
             , and tools like{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-fuchsia-800 mx-0.5">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-rose-100 text-fuchsia-800 mx-0.5">
               Git{" "}
             </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-cyan-800 mx-0.5">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-rose-100 text-cyan-800 mx-0.5">
               Redux{" "}
             </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-rose-100 text-rose-800 mx-0.5">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-rose-100 text-rose-800 mx-0.5">
               Zustand
             </span>{" "}
             and{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 mx-0.5">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-indigo-100 text-indigo-800 mx-0.5">
               Tailwind CSS
             </span>{" "}
             to ship production-ready projects. Several of my builds (which you
