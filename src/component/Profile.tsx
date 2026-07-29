@@ -140,39 +140,12 @@ function Profile() {
           animate={visibleSections.has("whoami") ? "visible" : "hidden"}
         >
           <h3 className="font-semibold text-stone-700">Who Am I</h3>
-          <p className="text-xs sm:text-sm leading-loose text-stone-600 font-semibold md:text-base">
-            I&apos;m{" "}
-            <span className="font-bold text-black">Mohammed Irfan</span>, from{" "}
-            <span className="font-bold text-black">
-              Malappuram, Kerala, India
-            </span>
-            . I graduated in{" "}
-            <span className="font-bold text-black">Mathematics</span> from the
-            University of Calicut and transitioned into{" "}
-            <span className="font-bold text-black">web development</span>{" "}
-            through self-learning and hands-on experience.
-            <br />I completed a{" "}
-            <span className="font-bold text-black">
-              1-year internship at BridgeOn
-            </span>
-            , where I worked on production-grade{" "}
-            <span className="font-bold text-black">MERN stack</span>{" "}
-            applications in an{" "}
-            <span className="font-bold text-black">agile team environment</span>
-            . Currently, I’m working as a{" "}
-            <span className="font-bold text-black">
-              Freelance Web Developer
-            </span>
-            , building responsive, scalable full-stack applications and real-world systems
-            using{" "}
-            <span className="font-bold text-black">
-              Next.js, TypeScript, Node.js, MongoDB, and Prisma
-            </span>
-            .
-            <br />
-            I’m focused on building scalable full-stack applications, deepening
-            my backend expertise, and preparing for engineering roles in
-            high-impact environments.
+          <p className="text-xs sm:text-sm leading-relaxed text-stone-600 font-semibold md:text-base">
+            I&apos;m <span className="font-bold text-black">Mohammed Irfan</span>. Currently a{" "}
+            <span className="font-bold text-black">Freelance Web Developer</span> building scalable applications with Next.js and TypeScript. 
+            <br className="hidden sm:block" />
+            Previously, I built production-scale ERP & CRM platforms as a{" "}
+            <span className="font-bold text-black">Full-Stack Developer at Willowy Infotech</span>, and delivered MERN stack projects during a 1-year internship at BridgeOn.
           </p>
         </motion.div>
 
@@ -184,49 +157,15 @@ function Profile() {
           animate={visibleSections.has("whatido") ? "visible" : "hidden"}
         >
           <h3 className="font-semibold text-stone-700">What I Do</h3>
-          <p className="text-xs sm:text-sm text-stone-600 font-semibold md:text-base leading-loose">
-            I build full-stack web applications — both frontend and backend.
-            While I enjoy all aspects of development, I&apos;m especially drawn
-            to backend logic. I work with{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-purple-100 text-orange-800 mx-0.5">
-              JavaScript
-            </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-purple-100 text-purple-800 mx-0.5">
-              TypeScript
-            </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-blue-100 text-blue-800 mx-0.5">
-              React
-            </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-gray-100 text-gray-800 mx-0.5">
-              Next.js
-            </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-green-100 text-green-800 mx-0.5">
-              Node.js
-            </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-yellow-100 text-yellow-800 mx-0.5">
-              Express.js
-            </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-emerald-100 text-emerald-800 mx-0.5">
-              MongoDB
-            </span>
-            , <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-violet-100 text-violet-800 mx-0.5">Prisma</span>
-            , and tools like{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-rose-100 text-fuchsia-800 mx-0.5">
-              Git{" "}
-            </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-rose-100 text-cyan-800 mx-0.5">
-              Redux{" "}
-            </span>{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-rose-100 text-rose-800 mx-0.5">
-              Zustand
-            </span>{" "}
-            and{" "}
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-indigo-100 text-indigo-800 mx-0.5">
-              Tailwind CSS
-            </span>{" "}
-            to ship production-ready projects. Several of my builds (which you
-            might&apos;ve seen above) demonstrate how I apply these technologies
-            to deliver scalable, maintainable results.
+          <p className="text-xs sm:text-sm text-stone-600 font-semibold md:text-base leading-relaxed">
+            I specialize in the <span className="font-bold text-black">MERN stack & Next.js</span>. I architect and develop secure, modular RESTful APIs and performant SSR/SSG web applications.
+            <br className="hidden sm:block" />
+            My core stack includes{" "}
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-gray-100 text-gray-800 mx-0.5">Next.js</span>{" "}
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-purple-100 text-purple-800 mx-0.5">TypeScript</span>{" "}
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-green-100 text-green-800 mx-0.5">Node.js</span>{" "}
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs sm:text-sm font-bold bg-emerald-100 text-emerald-800 mx-0.5">MongoDB</span>
+            , along with <span className="font-bold text-black">Prisma, Express, React,</span> and state management tools like Redux & Zustand. I focus on database optimization, secure authentication, and scalable deployment.
           </p>
         </motion.div>
 

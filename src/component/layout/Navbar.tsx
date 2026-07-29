@@ -45,7 +45,7 @@ function Navbar() {
           onClick={(e) => handleSmoothScroll(e, "top")}
           className="text-lg tracking-tighter cursor-none text-gray-500 relative px-4 py-1 rounded-xl overflow-hidden"
         >
-          Irfan
+          Home
         </motion.a>
       </div>
 

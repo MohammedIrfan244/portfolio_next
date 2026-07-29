@@ -110,6 +110,9 @@ function ProjectCard({ project }: { project: IProject }) {
                     <h3 className="text-sm md:text-base font-thin transform transition-transform duration-300 group-hover:translate-y-[-4px]">
                         {project.title}
                     </h3>
+                    <p className={`text-xs sm:text-sm text-gray-200 bg-black/50 p-2 rounded-lg backdrop-blur-sm line-clamp-2 transform transition-transform duration-300 group-hover:translate-y-[-4px] ${inter.className}`}>
+                        {project.description}
+                    </p>
                     <div className='flex text-xs gap-2 font-thin sm:gap-3 md:gap-4 lg:gap-5 flex-wrap'>
                         {project.dep.map((tech,index)=>{
                             return <motion.p

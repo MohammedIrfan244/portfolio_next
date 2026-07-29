@@ -13,6 +13,7 @@ export interface IDep{
 export interface IProject {
   id: string;
   title: string;
+  description: string;
   video: string;
   cover: string;
   dep:IDep[];
