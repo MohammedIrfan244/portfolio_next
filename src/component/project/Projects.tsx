@@ -1,12 +1,9 @@
 "use client"
-import React, { useEffect, useCallback, useRef, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
-import type { Variants } from 'framer-motion'
+import React, { useEffect, useRef, useState } from 'react'
+import { motion, useInView, Variants } from 'framer-motion'
 import { playfairDisplay } from '@/lib/font'
 import projects from '@/lib/data/projects'
 import ProjectCard from './ProjectCard'
-import useEmblaCarousel from 'embla-carousel-react'
-import { LuCircleChevronLeft, LuCircleChevronRight } from "react-icons/lu"
 
 interface LenisOptions {
   duration: number
@@ -16,40 +13,10 @@ interface LenisOptions {
 
 function Projects() {
   const headingRef = useRef<HTMLDivElement>(null)
-  const carouselRef = useRef<HTMLDivElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(headingRef, { once: false, margin: "100px 0px -20% 0px" })
-  const isCarouselInView = useInView(carouselRef, { once: true, margin: "0px 0px -20% 0px" })
+  const isGridInView = useInView(gridRef, { once: true, margin: "0px 0px -20% 0px" })
   const [scrollProgress, setScrollProgress] = useState<number>(0)
-  
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: 'start',
-    skipSnaps: false,
-    dragFree: true,
-    breakpoints: {
-      '(min-width: 768px)': { dragFree: false }
-    }
-  })
-  
-  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
-  const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
-  
-  const scrollPrev = () => emblaApi && emblaApi.scrollPrev()
-  const scrollNext = () => emblaApi && emblaApi.scrollNext()
-  
-
-const onSelect = useCallback(() => {
-  if (!emblaApi) return
-  setPrevBtnEnabled(emblaApi.canScrollPrev())
-  setNextBtnEnabled(emblaApi.canScrollNext())
-}, [emblaApi])
-
-  
-  useEffect(() => {
-    if (!emblaApi) return
-    onSelect()
-    emblaApi.on('select', onSelect)
-    emblaApi.on('reInit', onSelect)
-  }, [emblaApi, onSelect])
   
   useEffect(() => {
     const initLenis = async () => {
@@ -120,10 +87,10 @@ const onSelect = useCallback(() => {
     })
   }
 
-  const carouselVariants: Variants = {
+  const gridVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: 60
+      y: 40
     },
     visible: {
       opacity: 1,
@@ -131,24 +98,7 @@ const onSelect = useCallback(() => {
       transition: {
         duration: 0.8,
         ease: [0.42, 0, 0.58, 1],
-        staggerChildren: 0.1
-      }
-    }
-  }
-
-  const buttonVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      x: 20,
-      scale: 0.8
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: [0.42, 0, 0.58, 1]
+        staggerChildren: 0.2
       }
     }
   }
@@ -156,24 +106,22 @@ const onSelect = useCallback(() => {
   const cardVariants: Variants = {
     hidden: {
       opacity: 0,
-      y: 30,
-      scale: 0.95
+      y: 40,
+      scale: 0.98
     },
-    visible: (i: number) => ({
+    visible: {
       opacity: 1,
       y: 0,
       scale: 1,
       transition: {
-        delay: i * 0.1,
         duration: 0.6,
         ease: [0.42, 0, 0.58, 1]
       }
-    })
+    }
   }
   
   const getLetterOpacity = (index: number): number => {
     if (!isInView) return 0
-
     const letterProgress: number = (index + 1) / letters.length
     const appearThreshold: number = letterProgress * 0.3 
     const disappearThreshold: number = 0.7 + (letterProgress * 0.3) 
@@ -187,8 +135,18 @@ const onSelect = useCallback(() => {
     }
   }
   
+  const getColSpan = (index: number) => {
+    switch(index) {
+      case 0: return 'md:col-span-7 md:row-span-2' 
+      case 1: return 'md:col-span-5 md:row-span-2' 
+      case 2: return 'md:col-span-5 md:row-span-1' 
+      case 3: return 'md:col-span-7 md:row-span-1' 
+      default: return 'md:col-span-6 md:row-span-1'
+    }
+  }
+
   return (
-    <div id='projects' className='px-4 sm:px-6 md:px-7 lg:px-10 py-12 sm:py-16 md:py-20 space-y-6 sm:space-y-8 md:space-y-12 lg:space-y-16 w-full'>
+    <div id='projects' className='px-4 sm:px-6 md:px-7 bg-black lg:px-10 py-12 sm:py-16 md:py-20 space-y-8 md:space-y-16 w-full'>
       <div ref={headingRef} className="relative">
         <h2 className={`font-thin text-7xl sm:text-8xl md:text-9xl text-white ${playfairDisplay.className}`}>
           {letters.map((letter: string, index: number) => {
@@ -216,71 +174,24 @@ const onSelect = useCallback(() => {
       </div>
       
       <motion.div 
-        ref={carouselRef}
-        className='relative'
-        variants={carouselVariants}
+        ref={gridRef}
+        variants={gridVariants}
         initial="hidden"
-        animate={isCarouselInView ? "visible" : "hidden"}
+        animate={isGridInView ? "visible" : "hidden"}
+        className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 grid-flow-row-dense auto-rows-[350px] md:auto-rows-[300px]"
       >
-        <motion.div 
-          className='flex justify-end gap-2 mb-6'
-          variants={buttonVariants}
-        >
-          <motion.button
-            onClick={scrollPrev}
-            disabled={!prevBtnEnabled}
-            aria-label="Previous Project"
-            className={`p-2 rounded-full transition-all duration-300 ${
-              prevBtnEnabled 
-                ? 'bg-white/20 hover:bg-white/30 text-white hover:scale-105' 
-                : 'bg-white/10 text-white/50 cursor-not-allowed'
-            }`}
-            whileHover={{ scale: prevBtnEnabled ? 1.05 : 1 }}
-            whileTap={{ scale: prevBtnEnabled ? 0.95 : 1 }}
-            variants={buttonVariants}
-          >
-            <span className="sr-only">Previous Project</span>
-            <LuCircleChevronLeft className="w-5 h-5" />
-          </motion.button>
-          <motion.button
-            onClick={scrollNext}
-            disabled={!nextBtnEnabled}
-            aria-label="Next Project"
-            className={`p-2 rounded-full transition-all duration-300 ${
-              nextBtnEnabled 
-                ? 'bg-white/20 hover:bg-white/30 text-white hover:scale-105' 
-                : 'bg-white/10 text-white/50 cursor-not-allowed'
-            }`}
-            whileHover={{ scale: nextBtnEnabled ? 1.05 : 1 }}
-            whileTap={{ scale: nextBtnEnabled ? 0.95 : 1 }}
-            variants={buttonVariants}
-          >
-            <span className="sr-only">Next Project</span>
-            <LuCircleChevronRight className="w-5 h-5" />
-          </motion.button>
-        </motion.div>
-
-        {/* Carousel Container */}
-        <motion.div 
-          className="overflow-hidden" 
-          ref={emblaRef}
-          variants={carouselVariants}
-        >
-          <div className="flex gap-4 sm:gap-6 md:gap-8">
-            {projects.map((project, index) => (
-              <motion.div 
-                key={project.id + index} 
-                className="flex-none"
-                custom={index}
-                variants={cardVariants}
-                initial="hidden"
-                animate={isCarouselInView ? "visible" : "hidden"}
-              >
-                <ProjectCard project={project} />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        {projects.map((project, index) => {
+          const isLarge = index === 0 || index === 1
+          return (
+            <motion.div 
+              key={project.id} 
+              variants={cardVariants}
+              className={`${getColSpan(index)} h-full w-full`}
+            >
+              <ProjectCard project={project} variant={isLarge ? 'large' : 'small'} />
+            </motion.div>
+          )
+        })}
       </motion.div>
     </div>
   )

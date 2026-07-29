@@ -14,9 +14,9 @@ export interface IProject {
   id: string;
   title: string;
   description: string;
-  video: string;
   cover: string;
   dep:IDep[];
   github: string;
   live: string;
+  bullets?: string[];
 }

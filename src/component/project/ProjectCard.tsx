@@ -1,129 +1,100 @@
 "use client"
-import React, { useEffect, useState } from 'react'
-import { playfairDisplay , inter } from '@/lib/font'
+import React from 'react'
+import { playfairDisplay, inter } from '@/lib/font'
 import { IProject } from '@/lib/types'
 import Image from 'next/image'
 import { FiGithub, FiExternalLink } from 'react-icons/fi'
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion'
 
-function ProjectCard({ project }: { project: IProject }) {
-    const [isPressed, setIsPressed] = useState(false)
-    const [isHovered, setIsHovered] = useState(false)
-    const [isMobile, setIsMobile] = useState(false)
+interface ProjectCardProps {
+    project: IProject;
+    variant: 'large' | 'small';
+}
 
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window)
-        }
-        
-        checkMobile()
-        window.addEventListener('resize', checkMobile)
-        
-        return () => window.removeEventListener('resize', checkMobile)
-    }, [project])
-
-    const handleTouchStart = () => {
-        if (isMobile) {
-            setIsPressed(true)
-        }
-    }
-
-    const handleTouchEnd = () => {
-        if (isMobile) {
-            setTimeout(() => setIsPressed(false), 6000) 
-        }
-    }
-
+function ProjectCard({ project, variant }: ProjectCardProps) {
     return (
-        <motion.div 
-        initial ={{opacity:0}}
-        whileInView={{opacity:1}}
-        transition={{duration:0.5,ease:'easeIn'}}
-            className={`${playfairDisplay.className} w-[400px] select-none sm:w-[450px] md:w-[500px] lg:w-[550px] h-[500px] sm:h-[450px] md:h-[400px] lg:h-[450px] overflow-hidden relative rounded-lg group transition-shadow duration-300`}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 0.98 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            viewport={{ once: true, margin: "-100px" }}
+            className={`group relative overflow-hidden bg-stone-900 rounded-none w-full h-full flex flex-col justify-end cursor-pointer ${playfairDisplay.className}`}
         >
-            <div className={`absolute inset-0 transition-all duration-500 ease-out ${
-                isMobile 
-                    ? (isPressed ? 'scale-110 opacity-0' : 'scale-100 opacity-100')
-                    : 'group-hover:scale-110 group-hover:opacity-0'
-            }`}>
+            {/* Background Image */}
+            <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105">
                 <Image
                     src={project.cover}
                     alt={`${project.title} cover`}
                     fill
-                    className="object-cover"
+                    className="object-cover opacity-60 group-hover:opacity-40 group-hover:grayscale transition-all duration-500"
                 />
             </div>
             
-            <div className={`absolute inset-0 transition-all duration-500 ease-out ${
-                isMobile 
-                    ? (isPressed ? 'opacity-100 scale-110' : 'opacity-0 scale-100')
-                    : 'opacity-0 group-hover:opacity-100 group-hover:scale-110'
-            }`}>
-                {(isHovered || isPressed) && (
-                    <video
-                        src={project.video}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className="w-full h-full object-cover"
-                    />
-                )}
-            </div>
+            {/* Dark Gradient Overlay for readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
-            <div className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
-                isMobile 
-                    ? (isPressed ? 'bg-black/60' : 'bg-black/40')
-                    : 'group-hover:bg-black/60'
-            }`} />
-
-            <div className="absolute inset-0 flex flex-col justify-between p-3 sm:p-4 md:p-5 lg:p-6 z-10">
-                <div className="flex gap-2 sm:gap-3 justify-start">
-                    <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="GitHub Repository"
-                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
-                    >
-                        <span className="sr-only">GitHub Repository</span>
-                        <FiGithub className="w-3 h-3 text-white" />
-                    </a>
-                    <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="Live Demo"
-                        className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
-                    >
-                        <span className="sr-only">Live Demo</span>
-                        <FiExternalLink className="w-3 h-3 text-white" />
-                    </a>
-                </div>
-
-                <div className="flex-1 flex items-end">
-                    <div className='text-white space-y-2 sm:space-y-2.5 md:space-y-3 lg:space-y-3'>
-                    <h3 className="text-sm md:text-base font-thin transform transition-transform duration-300 group-hover:translate-y-[-4px]">
+            {/* Content Container */}
+            <div className="relative z-10 p-5 sm:p-6 md:p-8 flex flex-col h-full justify-end">
+                
+                {/* Header (Links & Title) */}
+                <div className="flex flex-col gap-3 mb-4">
+                    <div className="flex gap-3 justify-start">
+                        <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="GitHub Repository"
+                            className="p-2 bg-white/10 backdrop-blur-md hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
+                        >
+                            <span className="sr-only">GitHub Repository</span>
+                            <FiGithub className="w-4 h-4 text-white" />
+                        </a>
+                        <a
+                            href={project.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Live Demo"
+                            className="p-2 bg-white/10 backdrop-blur-md hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
+                        >
+                            <span className="sr-only">Live Demo</span>
+                            <FiExternalLink className="w-4 h-4 text-white" />
+                        </a>
+                    </div>
+                    
+                    <h3 className={`text-2xl sm:text-3xl md:text-4xl text-white tracking-wide ${variant === 'large' ? 'font-medium' : 'font-light'}`}>
                         {project.title}
                     </h3>
-                    <p className={`text-xs sm:text-sm text-gray-200 bg-black/50 p-2 rounded-lg backdrop-blur-sm line-clamp-2 transform transition-transform duration-300 group-hover:translate-y-[-4px] ${inter.className}`}>
-                        {project.description}
-                    </p>
-                    <div className='flex text-xs gap-2 font-thin sm:gap-3 md:gap-4 lg:gap-5 flex-wrap'>
-                        {project.dep.map((tech,index)=>{
-                            return <motion.p
-                            initial={{opacity:0,y:10}}
-                            whileInView={{opacity:1,y:0}}
-                            transition={{duration:0.4,delay:index*0.1,ease:'backIn'}}
-                             className={`py-1 px-2 rounded-xl ${tech.color} ${inter.className}`} key={tech.id}>{tech.tool}</motion.p>
-                        })}
-                    </div>
-                    </div>
                 </div>
+
+                {/* Conditional Body based on Variant */}
+                {variant === 'large' ? (
+                    <div className="space-y-4">
+                        <p className={`text-sm sm:text-base text-gray-200 line-clamp-3 ${inter.className}`}>
+                            {project.description}
+                        </p>
+                        
+                        <div className="flex flex-wrap gap-2 pt-2">
+                            {project.dep.map((tech) => (
+                                <span 
+                                    key={tech.id}
+                                    className={`px-3 py-1 text-xs text-white ${tech.color} ${inter.className}`}
+                                >
+                                    {tech.tool}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                ) : (
+                    <div className={`space-y-2 mt-2 ${inter.className}`}>
+                        <ul className="list-disc list-inside text-sm text-gray-200 space-y-1">
+                            {project.bullets?.map((bullet, idx) => (
+                                <li key={idx} className="line-clamp-2">{bullet}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
             </div>
         </motion.div>
     )
