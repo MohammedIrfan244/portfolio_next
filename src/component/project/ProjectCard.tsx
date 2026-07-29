@@ -8,6 +8,7 @@ import {motion} from 'framer-motion'
 
 function ProjectCard({ project }: { project: IProject }) {
     const [isPressed, setIsPressed] = useState(false)
+    const [isHovered, setIsHovered] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
@@ -41,6 +42,8 @@ function ProjectCard({ project }: { project: IProject }) {
             className={`${playfairDisplay.className} w-[400px] select-none sm:w-[450px] md:w-[500px] lg:w-[550px] h-[500px] sm:h-[450px] md:h-[400px] lg:h-[450px] overflow-hidden relative rounded-lg group transition-shadow duration-300`}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
         >
             <div className={`absolute inset-0 transition-all duration-500 ease-out ${
                 isMobile 
@@ -60,14 +63,16 @@ function ProjectCard({ project }: { project: IProject }) {
                     ? (isPressed ? 'opacity-100 scale-110' : 'opacity-0 scale-100')
                     : 'opacity-0 group-hover:opacity-100 group-hover:scale-110'
             }`}>
-                <video
-                    src={project.video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover"
-                />
+                {(isHovered || isPressed) && (
+                    <video
+                        src={project.video}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="w-full h-full object-cover"
+                    />
+                )}
             </div>
 
             <div className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
@@ -82,16 +87,20 @@ function ProjectCard({ project }: { project: IProject }) {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="GitHub Repository"
                         className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
                     >
+                        <span className="sr-only">GitHub Repository</span>
                         <FiGithub className="w-3 h-3 text-white" />
                     </a>
                     <a
                         href={project.live}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Live Demo"
                         className="p-2 bg-white/20 backdrop-blur-sm rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
                     >
+                        <span className="sr-only">Live Demo</span>
                         <FiExternalLink className="w-3 h-3 text-white" />
                     </a>
                 </div>

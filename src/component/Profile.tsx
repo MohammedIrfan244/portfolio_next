@@ -104,7 +104,7 @@ function Profile() {
       className="px-6 md:px-7 lg:px-10 py-10 rounded-3xl md:rounded-4xl w-full bg-white"
     >
       <div className="w-full overflow-x-hidden hide-scrollbar">
-        <motion.h3
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -112,8 +112,8 @@ function Profile() {
     text-stone-800 font-bold px-3`}
         >
           About
-        </motion.h3>
-        <motion.h1
+        </motion.h2>
+        <motion.h2
           ref={headingRef}
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -127,7 +127,7 @@ function Profile() {
   `}
         >
           Me.
-        </motion.h1>
+        </motion.h2>
       </div>
       <div
         className={`${inter.className} text-sm sm:text-base md:text-lg space-y-16 sm:space-y-20 md:space-y-28 py-6 sm:py-12 md:pb-16 lg:pb-20`}
@@ -161,12 +161,9 @@ function Profile() {
             <span className="font-bold text-black">agile team environment</span>
             . Currently, I’m working as a{" "}
             <span className="font-bold text-black">
-              Full-Stack Developer Intern at Willowy Infotech
+              Freelance Web Developer
             </span>
-            , contributing to real-world{" "}
-            <span className="font-bold text-black">
-              ERP, CRM, and e-commerce systems
-            </span>{" "}
+            , building responsive, scalable full-stack applications and real-world systems
             using{" "}
             <span className="font-bold text-black">
               Next.js, TypeScript, Node.js, MongoDB, and Prisma

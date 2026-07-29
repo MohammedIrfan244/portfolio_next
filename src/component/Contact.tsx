@@ -36,14 +36,14 @@ function Contact() {
       transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       className="w-full px-6 py-10 sm:py-16 md:py-24 lg:py-28 md:px-7 space-y-20 md:space-y-24 lg:px-10 text-white rounded-3xl md:rounded-4xl"
     >
-      <motion.h1
+      <motion.h2
         className={`flicker text-[100px] sm:text-[150px] md:text-[200px] leading-none md:leading-tight text-center ${playfairDisplay.className}`}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
         Where to find me.
-      </motion.h1>
+      </motion.h2>
 
       <motion.div
         className="mt-6 sm:mt-8 md:mt-10 space-y-10 sm:space-y-16 md:space-y-20 text-center"
@@ -66,10 +66,10 @@ function Contact() {
           irfanndmb@gmail.com
         </motion.a>
         <div className='w-full flex items-center justify-center gap-4 sm:gap-8 md:gap-12'>
-          <a target='_blank' href="tel:+918891555811" className='flex font-semibold transition-all duration-100 ease-out items-center gap-2 rounded-2xl py-1.5 px-3 hover:scale-[1.02] text-sm bg-green-900 hover:bg-green-600'><FiPhoneCall className='w-3 h-3 stroke-3' /> +91 889155 5811</a>
-          <a target='_blank' href='https://github.com/MohammedIrfan244' className='p-2 rounded-full hover:scale-105 transition-all duration-100 ease-out bg-stone-900 hover:bg-stone-600' ><FiGithub /></a>
-          <a target='_blank' href='https://www.linkedin.com/in/mohammed-irfan-n' className='p-2 rounded-full transition-all duration-100 ease-out hover:scale-105 bg-blue-900 hover:bg-blue-600' ><FiLinkedin /></a>
-          <a target='_blank' href='/files/MohammedIrfan.pdf' title='Download My Resume' download={true} className='p-2 rounded-full transition-all duration-100 ease-out hover:scale-105 bg-orange-900 hover:bg-orange-600' ><FiDownload /></a>
+          <a target='_blank' href="tel:+918891555811" className='flex font-semibold transition-all duration-100 ease-out items-center gap-2 rounded-2xl py-1.5 px-3 hover:scale-[1.02] text-sm bg-green-900 hover:bg-green-600 text-white'><FiPhoneCall className='w-3 h-3 stroke-3' /> <span className="sr-only">Phone Number</span>+91 889155 5811</a>
+          <a target='_blank' href='https://github.com/MohammedIrfan244' aria-label='GitHub Profile' className='p-2 rounded-full hover:scale-105 transition-all duration-100 ease-out bg-stone-900 hover:bg-stone-600 text-white' ><span className="sr-only">GitHub Profile</span><FiGithub /></a>
+          <a target='_blank' href='https://www.linkedin.com/in/mohammed-irfan-n' aria-label='LinkedIn Profile' className='p-2 rounded-full transition-all duration-100 ease-out hover:scale-105 bg-blue-900 hover:bg-blue-600 text-white' ><span className="sr-only">LinkedIn Profile</span><FiLinkedin /></a>
+          <a target='_blank' href='/files/MohammedIrfan.pdf' title='Download My Resume' download={true} aria-label='Download Resume' className='p-2 rounded-full transition-all duration-100 ease-out hover:scale-105 bg-orange-900 hover:bg-orange-600 text-white' ><span className="sr-only">Download Resume</span><FiDownload /></a>
         </div>
         </div>
       </motion.div>

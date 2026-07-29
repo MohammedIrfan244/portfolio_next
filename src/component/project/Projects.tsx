@@ -190,7 +190,7 @@ const onSelect = useCallback(() => {
   return (
     <div id='projects' className='px-4 sm:px-6 md:px-7 lg:px-10 py-12 sm:py-16 md:py-20 space-y-6 sm:space-y-8 md:space-y-12 lg:space-y-16 w-full'>
       <div ref={headingRef} className="relative">
-        <h1 className={`font-thin text-7xl sm:text-8xl md:text-9xl text-white ${playfairDisplay.className}`}>
+        <h2 className={`font-thin text-7xl sm:text-8xl md:text-9xl text-white ${playfairDisplay.className}`}>
           {letters.map((letter: string, index: number) => {
             const opacity = getLetterOpacity(index)
             
@@ -212,7 +212,7 @@ const onSelect = useCallback(() => {
               </motion.span>
             )
           })}
-        </h1>
+        </h2>
       </div>
       
       <motion.div 
@@ -229,6 +229,7 @@ const onSelect = useCallback(() => {
           <motion.button
             onClick={scrollPrev}
             disabled={!prevBtnEnabled}
+            aria-label="Previous Project"
             className={`p-2 rounded-full transition-all duration-300 ${
               prevBtnEnabled 
                 ? 'bg-white/20 hover:bg-white/30 text-white hover:scale-105' 
@@ -238,11 +239,13 @@ const onSelect = useCallback(() => {
             whileTap={{ scale: prevBtnEnabled ? 0.95 : 1 }}
             variants={buttonVariants}
           >
+            <span className="sr-only">Previous Project</span>
             <LuCircleChevronLeft className="w-5 h-5" />
           </motion.button>
           <motion.button
             onClick={scrollNext}
             disabled={!nextBtnEnabled}
+            aria-label="Next Project"
             className={`p-2 rounded-full transition-all duration-300 ${
               nextBtnEnabled 
                 ? 'bg-white/20 hover:bg-white/30 text-white hover:scale-105' 
@@ -252,6 +255,7 @@ const onSelect = useCallback(() => {
             whileTap={{ scale: nextBtnEnabled ? 0.95 : 1 }}
             variants={buttonVariants}
           >
+            <span className="sr-only">Next Project</span>
             <LuCircleChevronRight className="w-5 h-5" />
           </motion.button>
         </motion.div>

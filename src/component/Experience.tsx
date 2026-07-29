@@ -108,14 +108,14 @@ function Experience() {
       className="px-6 md:px-7 lg:px-10 py-10 sm:py-16 md:py-20 w-full text-white"
     >
       <div className="w-full overflow-x-hidden hide-scrollbar mb-10 sm:mb-16">
-        <motion.h3
+        <motion.h2
           initial={{ opacity: 0, y: 50, rotate: -2, scale: 0.9 }}
           whileInView={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
           transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
           className={`${playfairDisplay.className} text-[50px] sm:text-[70px] md:text-[90px] lg:text-[100px] text-stone-200 font-bold px-3`}
         >
           Experience.
-        </motion.h3>
+        </motion.h2>
       </div>
 
       <div className="px-0 md:px-6">
@@ -169,11 +169,11 @@ function Experience() {
                 whileInView="visible"
                 viewport={{ margin: "-50px" }}
               >
-                <h4
+                <h3
                   className={`${inter.className} text-xl sm:text-2xl md:text-3xl font-bold text-stone-100 mb-2`}
                 >
                   {exp.role}
-                </h4>
+                </h3>
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mt-4">
                   <p
                     className={`${inter.className} text-sm sm:text-base md:text-lg text-stone-400 font-medium`}

@@ -12,7 +12,7 @@ import React from "react";
 function Theme() {
   useLenisScroll();
   return (
-    <>
+    <main>
       <MagneticCursor />
       <Navbar />
       <Hero />
@@ -20,7 +20,7 @@ function Theme() {
       <Profile />
       <Experience />
       <Contact />
-    </>
+    </main>
   );
 }
 
