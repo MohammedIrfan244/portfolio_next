@@ -7,7 +7,7 @@ const projects: IProject[] = [
     category: "Cross-Platform Productivity",
     year: "2025",
     description: "A full-stack productivity platform built with Next.js, shipping on both web and Android from a single codebase.",
-    cover: "/images/duriocover.png",
+    cover: "/images/duriocover_opt.webp",
     dep: [
       { id: "8", tool: "Next.js", color: "bg-blue-900" },
       { id: "7", tool: "Prisma", color: "bg-gray-900" },
@@ -43,7 +43,7 @@ const projects: IProject[] = [
     category: "Social Platform & Real-Time Chat",
     year: "2024",
     description: "A social media platform featuring follow relationships, a personalized feed, and real-time messaging & notifications via WebSockets.",
-    cover: "/images/instagramcover.jpg",
+    cover: "/images/instagramcover_opt.jpg",
     dep: [
       { id: "10", tool: "React.js", color: "bg-sky-900" },
       { id: "11", tool: "Express", color: "bg-gray-900" },

@@ -1,18 +1,31 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { inter } from "@/lib/font";
-import { motion } from "framer-motion";
 import { useLenis } from "@/component/providers/SmoothScrollProvider";
 
+/**
+ * Navbar with CSS-only morphing transition.
+ *
+ * Instead of Framer Motion animate (which interpolates discrete states),
+ * we use a single element with CSS transition on:
+ *   - max-width (full → pill width)
+ *   - padding (controls the inset shrink)
+ *   - border-radius (0 → pill)
+ *   - background-color (transparent → dark glass)
+ *   - backdrop-filter (none → blur)
+ *
+ * All transitions use the same cubic-bezier for a unified morph feel.
+ */
 function Navbar() {
   const lenis = useLenis();
   const [isScrolled, setIsScrolled] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!lenis) return;
     const handleScroll = ({ scroll }: { scroll: number }) => {
-      setIsScrolled(scroll > 60);
+      setIsScrolled(scroll > 50);
     };
     lenis.on("scroll", handleScroll);
     return () => {
@@ -37,72 +50,81 @@ function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-40 px-3 sm:px-6 md:px-8 py-3 sm:py-5 pointer-events-none flex justify-center">
-      {/* The single morphing navbar container with physics-based spring morphing */}
-      <motion.nav
-        layout
-        initial={false}
-        animate={{
-          maxWidth: isScrolled ? "660px" : "100%",
-          backgroundColor: isScrolled ? "rgba(10, 10, 10, 0.82)" : "rgba(255, 255, 255, 0)",
-          borderColor: isScrolled ? "rgba(255, 255, 255, 0.12)" : "rgba(255, 255, 255, 0)",
-          boxShadow: isScrolled ? "0 12px 36px rgba(0, 0, 0, 0.55)" : "0 0 0 rgba(0, 0, 0, 0)",
-          backdropFilter: isScrolled ? "blur(16px)" : "blur(0px)",
-          paddingLeft: isScrolled ? "1.5rem" : "0.75rem",
-          paddingRight: isScrolled ? "1.5rem" : "0.75rem",
-          paddingTop: isScrolled ? "0.6rem" : "0.4rem",
-          paddingBottom: isScrolled ? "0.6rem" : "0.4rem",
-          y: isScrolled ? 6 : 0,
+    <header className="fixed top-0 left-0 w-full z-40 pointer-events-none">
+      {/* Centering wrapper with top padding transition */}
+      <div
+        className="w-full flex justify-center transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+        style={{
+          paddingTop: isScrolled ? "12px" : "0px",
+          paddingLeft: isScrolled ? "16px" : "0px",
+          paddingRight: isScrolled ? "16px" : "0px",
         }}
-        transition={{
-          type: "spring",
-          stiffness: 240,
-          damping: 26,
-          mass: 0.8,
-        }}
-        className={`pointer-events-auto w-full flex items-center justify-between rounded-full border border-transparent ${inter.className}`}
       >
-        {/* Monogram Brand Mark: IRFAN */}
-        <a
-          href="#"
-          onClick={(e) => handleSmoothScroll(e, "top")}
-          className="group flex items-center gap-2 cursor-pointer select-none"
+        <nav
+          ref={navRef}
+          className={`
+            pointer-events-auto flex items-center justify-between
+            px-4 sm:px-6 py-3 sm:py-3.5 border
+            transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+            ${inter.className}
+          `}
+          style={{
+            width: "100%",
+            maxWidth: isScrolled ? "48rem" : "100%",
+            backgroundColor: isScrolled
+              ? "rgba(12, 12, 12, 0.85)"
+              : "rgba(255, 255, 255, 0)",
+            borderRadius: isScrolled ? "9999px" : "0px",
+            borderColor: isScrolled
+              ? "rgba(255, 255, 255, 0.1)"
+              : "rgba(0, 0, 0, 0)",
+            backdropFilter: isScrolled ? "blur(20px)" : "blur(0px)",
+            WebkitBackdropFilter: isScrolled ? "blur(20px)" : "blur(0px)",
+            boxShadow: "none",
+          }}
         >
-          <span
-            className={`font-mono text-xs sm:text-sm font-bold tracking-widest transition-colors duration-300 ${
-              isScrolled
-                ? "text-white group-hover:text-stone-300"
-                : "text-stone-900 group-hover:text-black"
-            }`}
+          {/* Monogram: IRFAN */}
+          <a
+            href="#"
+            onClick={(e) => handleSmoothScroll(e, "top")}
+            className="group flex items-center gap-2 cursor-pointer select-none"
           >
-            IRFAN
-          </span>
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        </a>
-
-        {/* Navigation Links */}
-        <div className="flex items-center gap-1 sm:gap-2">
-          {[
-            { label: "Work", href: "#projects" },
-            { label: "About", href: "#profile" },
-            { label: "Experience", href: "#experience" },
-            { label: "Contact", href: "#contact" },
-          ].map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={(e) => handleSmoothScroll(e, item.href)}
-              className={`relative px-2.5 sm:px-3.5 py-1 text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 rounded-full hover:scale-105 select-none ${
+            <span
+              className={`font-mono text-xs sm:text-sm font-bold tracking-widest transition-colors duration-700 ${
                 isScrolled
-                  ? "text-stone-300 hover:text-white hover:bg-white/10"
-                  : "text-stone-700 hover:text-black hover:bg-stone-900/5"
+                  ? "text-white group-hover:text-stone-300"
+                  : "text-stone-900 group-hover:text-black"
               }`}
             >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </motion.nav>
+              IRFAN
+            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          </a>
+
+          {/* Navigation Links */}
+          <div className="flex items-center gap-0.5 sm:gap-1.5">
+            {[
+              { label: "Work", href: "#projects" },
+              { label: "About", href: "#profile" },
+              { label: "Experience", href: "#experience" },
+              { label: "Contact", href: "#contact" },
+            ].map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => handleSmoothScroll(e, item.href)}
+                className={`relative px-2.5 sm:px-3.5 py-1 text-xs sm:text-sm font-medium tracking-wide rounded-full select-none transition-colors duration-700 ${
+                  isScrolled
+                    ? "text-stone-300 hover:text-white hover:bg-white/10"
+                    : "text-stone-600 hover:text-black hover:bg-stone-200/50"
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }
