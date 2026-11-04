@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useRef, useState, useEffect } from "react";
 import {
   motion,
@@ -13,28 +14,46 @@ import { playfairDisplay, inter } from "@/lib/font";
 const experiences = [
   {
     id: 1,
-    role: "Freelance Web Developer",
-    company: "Remote",
+    role: "Freelance Web Developer & Systems Consultant",
+    company: "Independent Client Engagements",
+    location: "Remote",
     date: "February 2026 – Present",
+    highlights: [
+      "Architecting custom full-stack web applications with Next.js 15, TypeScript, and MongoDB",
+      "Building high-performance SSR portals with sub-second LCP and headless CMS integrations",
+      "Crafting Awwwards-caliber interactive interfaces with Framer Motion and custom physics",
+    ],
   },
   {
     id: 2,
     role: "Full-Stack Developer",
-    company: "Willowy Infotech Pvt. Ltd., Calicut, Kerala, India",
+    company: "Willowy Infotech Pvt. Ltd.",
+    location: "Calicut, Kerala, India",
     date: "August 2025 – February 2026",
+    highlights: [
+      "Engineered multi-tenant ERP & CRM platforms handling complex transactional workflows",
+      "Designed secure RESTful API architectures with role-based access control (RBAC)",
+      "Optimized MongoDB aggregations and Prisma queries, cutting critical report load times by 40%",
+    ],
   },
   {
     id: 3,
     role: "Web Developer Intern",
-    company: "BridgeOn, Malappuram, Kerala, India",
+    company: "BridgeOn",
+    location: "Malappuram, Kerala, India",
     date: "August 2024 – August 2025",
+    highlights: [
+      "Delivered production-grade MERN stack applications adhering to agile sprint cycles",
+      "Implemented real-time bidirectional communication features via WebSockets and Socket.io",
+      "Built responsive, accessible frontend component systems with React and Tailwind CSS",
+    ],
   },
 ];
 
 const sectionVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: 50,
+    y: 40,
     filter: "blur(4px)",
   },
   visible: {
@@ -43,9 +62,9 @@ const sectionVariants: Variants = {
     filter: "blur(0px)",
     transition: {
       type: "spring",
-      stiffness: 80,
-      damping: 12,
-      mass: 1,
+      stiffness: 85,
+      damping: 14,
+      mass: 0.8,
     },
   },
 };
@@ -57,7 +76,7 @@ function Experience() {
 
   const [height, setHeight] = useState(0);
 
-  // Measure the container height to dynamically generate the curved SVG path
+  // Dynamically measure track container height for the responsive SVG thread
   useEffect(() => {
     const updateHeight = () => {
       if (trackRef.current) {
@@ -69,26 +88,22 @@ function Experience() {
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
-  // Track the scroll progress relative to the experience track container
   const { scrollYProgress } = useScroll({
     target: trackRef,
     offset: ["start center", "end center"],
   });
 
-  // Wrap the scroll progress in a spring to give it a bouncy feel
   const springProgress = useSpring(scrollYProgress, {
-    stiffness: 50,
-    damping: 12,
+    stiffness: 60,
+    damping: 14,
     mass: 1,
   });
 
   // Dynamic SVG Path generation for an organic, thread-like look
-  // It starts top center (25), swings right (80), swings left (-30), and loops down smoothly.
   const svgPath = `M 25 0 C 80 ${height * 0.2}, -30 ${height * 0.4}, 25 ${
     height * 0.5
   } C 80 ${height * 0.7}, -30 ${height * 0.9}, 25 ${height}`;
 
-  // Motion values to animate the bouncing dot exactly along the SVG path
   const cx = useMotionValue(25);
   const cy = useMotionValue(0);
 
@@ -102,25 +117,37 @@ function Experience() {
   });
 
   return (
-    <div
+    <section
       ref={containerRef}
       id="experience"
-      className="px-6 md:px-7 lg:px-10 py-10 sm:py-16 md:py-20 w-full text-white"
+      className="relative px-6 md:px-7 lg:px-10 py-16 sm:py-20 md:py-28 w-full text-white bg-[#050908] overflow-hidden"
     >
-      <div className="w-full overflow-x-hidden hide-scrollbar mb-10 sm:mb-16">
+      {/* Editorial Meta Bar */}
+      <div className="flex items-center justify-between text-xs font-mono tracking-widest text-stone-500 border-b border-stone-800/80 pb-4 mb-8 sm:mb-12">
+        <div className="flex items-center gap-3">
+          <span className="text-stone-300 font-semibold">// 03</span>
+          <span>TIMELINE & INDUSTRY TRACK</span>
+        </div>
+        <div className="hidden sm:block">
+          <span>[ 03 MILESTONES ]</span>
+        </div>
+      </div>
+
+      {/* Massive Editorial Header */}
+      <div className="w-full overflow-x-hidden hide-scrollbar mb-12 sm:mb-16">
         <motion.h2
-          initial={{ opacity: 0, y: 50, rotate: -2, scale: 0.9 }}
-          whileInView={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
-          transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
-          className={`${playfairDisplay.className} text-[50px] sm:text-[70px] md:text-[90px] lg:text-[100px] text-stone-200 font-bold px-3`}
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.7, type: "spring", bounce: 0.3 }}
+          className={`${playfairDisplay.className} text-[50px] sm:text-[70px] md:text-[90px] lg:text-[105px] text-stone-100 font-bold px-1 tracking-tight`}
         >
           Experience.
         </motion.h2>
       </div>
 
-      <div className="px-0 md:px-6">
-        <div ref={trackRef} className="relative flex min-h-[400px]">
-          {/* SVG Canvas for the curved thread */}
+      <div className="px-0 md:px-4">
+        <div ref={trackRef} className="relative flex min-h-[450px]">
+          {/* SVG Thread Canvas */}
           <div className="absolute left-0 top-0 bottom-0 w-[50px] md:w-[80px]">
             {height > 0 && (
               <svg
@@ -129,75 +156,97 @@ function Experience() {
                 className="overflow-visible"
                 style={{ position: "absolute", left: 0, top: 0 }}
               >
-                {/* Background dimmed thread */}
+                <defs>
+                  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                {/* Background Dimmed Organic Thread */}
                 <path
                   d={svgPath}
                   fill="transparent"
-                  stroke="#292524"
-                  strokeWidth="2"
+                  stroke="#262322"
+                  strokeWidth="2.5"
                 />
 
-                {/* Active bright thread that draws itself on scroll */}
+                {/* Active Light Thread tracking scroll */}
                 <motion.path
                   ref={pathRef}
                   d={svgPath}
                   fill="transparent"
-                  stroke="#a8a29e"
-                  strokeWidth="2"
+                  stroke="#d6d3d1"
+                  strokeWidth="2.5"
                   style={{ pathLength: springProgress }}
                 />
 
-                {/* The glowing dot tracking the path */}
+                {/* Glowing Tracking Bead */}
                 <motion.circle
                   cx={cx}
                   cy={cy}
-                  r="6"
-                  fill="#f5f5f4"
-                  className="shadow-[0_0_15px_rgba(255,255,255,0.5)]"
+                  r="7"
+                  fill="#ffffff"
+                  filter="url(#glow)"
                 />
               </svg>
             )}
           </div>
 
-          {/* Experience Items List */}
-          <div className="space-y-12 sm:space-y-16 md:space-y-20 flex-1 ml-16 sm:ml-20 md:ml-28 pb-6 pt-4">
-            {experiences.map((exp) => (
+          {/* Experience Cards */}
+          <div className="space-y-12 sm:space-y-16 md:space-y-20 flex-1 ml-16 sm:ml-20 md:ml-28 pb-8 pt-2">
+            {experiences.map((exp, idx) => (
               <motion.div
                 key={exp.id}
                 variants={sectionVariants}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ margin: "-50px" }}
+                className="group relative p-6 sm:p-8 bg-stone-950/60 border border-white/[0.07] hover:border-white/20 transition-all duration-300 rounded-none space-y-4"
               >
-                <h3
-                  className={`${inter.className} text-xl sm:text-2xl md:text-3xl font-bold text-stone-100 mb-2`}
-                >
-                  {exp.role}
-                </h3>
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 mt-4">
-                  <p
-                    className={`${inter.className} text-sm sm:text-base md:text-lg text-stone-400 font-medium`}
-                  >
-                    {exp.company}
-                  </p>
-                  <motion.p
-                    whileHover={{
-                      scale: 1.05,
-                      backgroundColor: "#292524",
-                      color: "#f5f5f4",
-                    }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    className={`${inter.className} text-xs sm:text-sm md:text-base text-stone-500 font-semibold px-4 py-2 bg-stone-900/50 rounded-full w-fit cursor-default`}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/[0.06] pb-4">
+                  <div>
+                    <span className="font-mono text-xs text-stone-500 uppercase tracking-widest block mb-1">
+                      MILESTONE // 0{idx + 1}
+                    </span>
+                    <h3
+                      className={`${inter.className} text-xl sm:text-2xl md:text-3xl font-bold text-stone-100 group-hover:text-white transition-colors`}
+                    >
+                      {exp.role}
+                    </h3>
+                  </div>
+
+                  <span
+                    className={`${inter.className} text-xs sm:text-sm font-mono text-stone-300 px-3 py-1.5 bg-white/[0.05] border border-white/[0.1] rounded-none w-fit self-start sm:self-center`}
                   >
                     {exp.date}
-                  </motion.p>
+                  </span>
                 </div>
+
+                <div className="flex items-center gap-2 text-stone-400 font-mono text-xs sm:text-sm">
+                  <span className="text-stone-200 font-semibold">{exp.company}</span>
+                  <span>•</span>
+                  <span>{exp.location}</span>
+                </div>
+
+                {/* Key Achievements */}
+                <ul className="space-y-2 pt-2 text-sm text-stone-300 leading-relaxed font-sans">
+                  {exp.highlights.map((item, hIdx) => (
+                    <li key={hIdx} className="flex items-start gap-2.5">
+                      <span className="text-stone-500 font-mono text-xs mt-1">→</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

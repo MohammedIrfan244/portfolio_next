@@ -3,18 +3,21 @@
 import React, { useState, useEffect } from "react";
 import { inter } from "@/lib/font";
 import { motion } from "framer-motion";
-import { useLenisScroll } from "@/lib/hooks/useLenisScroll";
+import { useLenis } from "@/component/providers/SmoothScrollProvider";
 
 function Navbar() {
-  const lenis = useLenisScroll();
+  const lenis = useLenis();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    if (lenis) {
-      lenis.on("scroll", ({ scroll }: { scroll: number }) => {
-        setIsScrolled(scroll > 50);
-      });
-    }
+    if (!lenis) return;
+    const handleScroll = ({ scroll }: { scroll: number }) => {
+      setIsScrolled(scroll > 60);
+    };
+    lenis.on("scroll", handleScroll);
+    return () => {
+      lenis.off("scroll", handleScroll);
+    };
   }, [lenis]);
 
   const handleSmoothScroll = (
@@ -24,54 +27,66 @@ function Navbar() {
     e.preventDefault();
     if (lenis) {
       lenis.scrollTo(target, {
-        duration: 1.5,
+        duration: 1.4,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       });
     }
   };
 
   return (
-    <motion.div
-      className={`fixed select-none w-full flex justify-between items-center py-5 md:py-7 lg:py-7 px-3 sm:px-6 md:px-7 lg:px-10 font-bold text-black z-30 transition-all duration-300 ${inter.className} ${
-        isScrolled ? "bg-transparent" : "bg-white"
-      }`}
-    >
-      <div className="relative inline-block">
-        <motion.a
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+    <header className="fixed top-0 left-0 w-full z-40 px-4 sm:px-6 md:px-8 py-4 sm:py-6 pointer-events-none flex justify-center">
+      <motion.nav
+        initial={{ y: -30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className={`pointer-events-auto flex items-center justify-between transition-all duration-500 rounded-full ${
+          isScrolled
+            ? "w-full max-w-2xl px-5 sm:px-6 py-2.5 bg-stone-950/80 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+            : "w-full px-2 sm:px-4 py-2 bg-transparent"
+        } ${inter.className}`}
+      >
+        {/* Monogram Brand Mark */}
+        <a
           href="#"
           onClick={(e) => handleSmoothScroll(e, "top")}
-          className="text-base sm:text-lg tracking-tighter cursor-none text-gray-500 relative px-2 sm:px-4 py-1 rounded-xl overflow-hidden"
+          className="group flex items-center gap-2 cursor-pointer"
         >
-          Home
-        </motion.a>
-      </div>
+          <span
+            className={`font-mono text-xs sm:text-sm font-bold tracking-widest transition-colors ${
+              isScrolled
+                ? "text-white group-hover:text-stone-300"
+                : "text-stone-900 group-hover:text-black"
+            }`}
+          >
+            M. IRFAN
+          </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+        </a>
 
-      {/* Nav links */}
-      <div className="flex gap-1 sm:gap-3 md:gap-5 lg:gap-6 text-base">
-        {[
-          { label: "Work", href: "#projects", delay: 0.1 },
-          { label: "About", href: "#profile", delay: 0.2 },
-          { label: "Experience", href: "#experience", delay: 0.3 },
-          { label: "Contact", href: "#contact", delay: 0.4 },
-        ].map((item) => (
-          <div key={item.label} className="relative inline-block">
-            <motion.a
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: item.delay }}
+        {/* Navigation Links */}
+        <div className="flex items-center gap-1 sm:gap-2">
+          {[
+            { label: "Work", href: "#projects" },
+            { label: "About", href: "#profile" },
+            { label: "Experience", href: "#experience" },
+            { label: "Contact", href: "#contact" },
+          ].map((item) => (
+            <a
+              key={item.label}
               href={item.href}
               onClick={(e) => handleSmoothScroll(e, item.href)}
-              className="text-xs sm:text-sm cursor-none relative z-10 px-1.5 sm:px-4 py-1 rounded-xl text-gray-500 overflow-hidden"
+              className={`relative px-2.5 sm:px-3.5 py-1 text-xs sm:text-sm font-medium tracking-wide transition-all duration-300 rounded-full hover:scale-105 ${
+                isScrolled
+                  ? "text-stone-300 hover:text-white hover:bg-white/10"
+                  : "text-stone-700 hover:text-black hover:bg-stone-900/5"
+              }`}
             >
               {item.label}
-            </motion.a>
-          </div>
-        ))}
-      </div>
-    </motion.div>
+            </a>
+          ))}
+        </div>
+      </motion.nav>
+    </header>
   );
 }
 

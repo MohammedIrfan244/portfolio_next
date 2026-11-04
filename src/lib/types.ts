@@ -1,13 +1,13 @@
 export interface INavigation {
-    id: string;
+  id: string;
   name: string;
   value: string;
 }
 
-export interface IDep{
-  id:string;
-  color:string;
-  tool:string;
+export interface IDep {
+  id: string;
+  color: string;
+  tool: string;
 }
 
 export interface IProject {
@@ -15,8 +15,10 @@ export interface IProject {
   title: string;
   description: string;
   cover: string;
-  dep:IDep[];
+  dep: IDep[];
   github: string;
   live: string;
   bullets?: string[];
+  category?: string;
+  year?: string;
 }

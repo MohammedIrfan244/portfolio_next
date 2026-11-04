@@ -1,194 +1,239 @@
-"use client"
-import React, { useEffect, useState, useRef } from 'react'
-import { motion, useScroll, useTransform, AnimatePresence, easeIn, easeOut } from 'framer-motion'
-import { playfairDisplay, inter } from '@/lib/font'
+"use client";
+
+import React, { useEffect, useState, useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+  easeIn,
+  easeOut,
+} from "framer-motion";
+import { playfairDisplay, inter } from "@/lib/font";
 
 function Hero() {
-  const [currentRole, setCurrentRole] = useState(0)
-  const containerRef = useRef(null)
+  const [currentRole, setCurrentRole] = useState(0);
+  const [timeString, setTimeString] = useState<string>("");
+  const containerRef = useRef(null);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
-  })
+    offset: ["start start", "end start"],
+  });
 
-
-  const name = "Mohammed Irfan"
-  const roleIndex = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8, 1], [0, 1, 2, 3, 4, 5])
+  const name = "Mohammed Irfan";
+  const roleIndex = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.4, 0.6, 0.8, 1],
+    [0, 1, 2, 3, 4, 5]
+  );
 
   const roles = [
-    "Web developer",
-    "UI/UX designer", 
-    "Full-stack developer",
-    "Frontend engineer",
-    "Freelancer"
-  ]
+    "Full-Stack Engineer",
+    "MERN Stack Specialist",
+    "Next.js Architect",
+    "UI/UX Craft Developer",
+    "Freelance Consultant",
+  ];
 
+  // Localized live clock (Kerala, India / IST)
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const formatted = new Intl.DateTimeFormat("en-US", {
+        timeZone: "Asia/Kolkata",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+      }).format(now);
+      setTimeString(formatted);
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const unsubscribe = roleIndex.on("change", (latest) => {
-      const index = Math.round(latest)
+      const index = Math.round(latest);
       if (index !== currentRole && index >= 0 && index < roles.length) {
-        setCurrentRole(index)
+        setCurrentRole(index);
       }
-    })
-    return () => unsubscribe()
-  }, [roleIndex, currentRole, roles.length])
-
-
-  useEffect(() => {
-    const initLenis = async () => {
-      const Lenis = (await import('lenis')).default
-      
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        touchMultiplier: 2,
-      })
-
-      function raf(time: number): void {
-        lenis.raf(time)
-        requestAnimationFrame(raf)
-      }
-
-      requestAnimationFrame(raf)
-
-      return () => lenis.destroy()
-    }
-
-    initLenis()
-  }, [])
-
+    });
+    return () => unsubscribe();
+  }, [roleIndex, currentRole, roles.length]);
 
   const containerVariants = {
     initial: { opacity: 1 },
-    animate: { 
+    animate: {
       opacity: 1,
       transition: {
         duration: 0.8,
-        staggerChildren: 0.2
-      }
-    }
-  }
+        staggerChildren: 0.15,
+      },
+    },
+  };
 
   const itemVariants = {
-    initial: { y: 30, opacity: 0 },
-    animate: { 
-      y: 0, 
+    initial: { y: 25, opacity: 0 },
+    animate: {
+      y: 0,
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: easeOut
-      }
-    }
-  }
+        ease: easeOut,
+      },
+    },
+  };
 
   const roleVariants = {
-    initial: { y: 20, opacity: 0 },
-    animate: { 
-      y: 0, 
+    initial: { y: 15, opacity: 0 },
+    animate: {
+      y: 0,
       opacity: 1,
       transition: {
-        duration: 0.4,
-        ease: easeOut
-      }
+        duration: 0.35,
+        ease: easeOut,
+      },
     },
-    exit: { 
-      y: -20, 
+    exit: {
+      y: -15,
       opacity: 0,
       transition: {
-        duration: 0.3,
-        ease: easeIn
-      }
-    }
-  }
+        duration: 0.25,
+        ease: easeIn,
+      },
+    },
+  };
 
-  const nameScale = useTransform(scrollYProgress, [0, 1], [1, 0.4])
-  const nameY = useTransform(scrollYProgress, [0, 1], [0, -150])
+  const nameScale = useTransform(scrollYProgress, [0, 1], [1, 0.45]);
+  const nameY = useTransform(scrollYProgress, [0, 1], [0, -140]);
 
   return (
-    <motion.div 
+    <motion.div
       ref={containerRef}
-      className='w-full py-10 select-none sm:py-5 md:py-0 h-screen px-6 md:px-7 rounded-b-3xl flex-col md:rounded-b-4xl lg:px-10 flex items-start justify-between bg-white relative overflow-hidden'
+      className="w-full pt-28 pb-8 select-none min-h-screen px-4 sm:px-6 md:px-7 rounded-b-3xl md:rounded-b-4xl lg:px-10 flex flex-col justify-between bg-white relative overflow-hidden shadow-2xl"
       variants={containerVariants}
       initial="initial"
       animate="animate"
     >
-      <motion.p 
-        className='text-xs text-stone-400 select-none'
+      {/* Live Editorial Status Strip */}
+      <motion.div
         variants={itemVariants}
-        whileHover={{ scale: 1.05, color: '#78716c' }}
-        transition={{ duration: 0.2 }}
+        className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-stone-200/80 pb-4 text-xs font-mono tracking-wider text-stone-500"
       >
-        Easter egg : You are not supposed to see this bruh 🤫
-      </motion.p>
+        <div className="flex items-center gap-2.5">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600"></span>
+          </span>
+          <span className="text-stone-800 font-semibold uppercase">
+            Available For Opportunities
+          </span>
+          <span className="text-stone-300">/</span>
+          <span className="hidden md:inline text-stone-400">Q1 2025</span>
+        </div>
 
-      <div className='flex w-full items-center justify-center'>
-        <motion.div 
-          className='space-y-1 sm:space-y-2 text-center'
+        <div className="flex items-center gap-4 text-stone-600 font-mono text-[11px] sm:text-xs">
+          <span>KERALA, IN (GMT+5:30)</span>
+          {timeString && (
+            <span className="px-2 py-0.5 bg-stone-100 rounded text-stone-800 font-semibold">
+              {timeString}
+            </span>
+          )}
+        </div>
+      </motion.div>
+
+      {/* Centerpiece Typographic Stage */}
+      <div className="flex w-full items-center justify-center py-12 md:py-20">
+        <motion.div
+          className="space-y-3 sm:space-y-4 text-center max-w-4xl"
           style={{ scale: nameScale, y: nameY }}
         >
-          <motion.p 
-            className={`${inter.className} text-base font-bold text-stone-700`}
+          <motion.div
             variants={itemVariants}
+            className="flex items-center justify-center gap-2 text-xs sm:text-sm uppercase tracking-widest text-stone-500 font-mono font-medium"
           >
-            Hello, I am
-          </motion.p>
-          
+            <span>[ SYSTEM DESIGN & FULL-STACK CRAFT ]</span>
+          </motion.div>
+
           <motion.h1
-  className={`${playfairDisplay.className} text-4xl sm:text-5xl md:text-6xl text-stone-800 font-bold flex flex-wrap justify-center`}
-  variants={itemVariants}
->
-  {name.split("").map((char, i) => (
-    <motion.span
-      key={i}
-      className="inline-block cursor-default"
-      whileHover={{
-        scale: 1.6,
-        y: -4,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 15,
-      }}
-      style={{
-        marginRight: char === " " ? "0.5rem" : "0.02em",
-      }}
-    >
-      {char === " " ? "\u00A0" : char}
-    </motion.span>
-  ))}
-</motion.h1>
-          <motion.p
-            className={`${inter.className} text-sm sm:text-base md:text-lg text-stone-500 font-semibold mt-2 sm:mt-4`}
+            className={`${playfairDisplay.className} text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-stone-900 font-medium tracking-tight flex flex-wrap justify-center`}
             variants={itemVariants}
           >
-            A full-stack developer
+            {name.split("").map((char, i) => (
+              <motion.span
+                key={i}
+                className="inline-block cursor-default"
+                whileHover={{
+                  scale: 1.35,
+                  y: -8,
+                  color: "#050908",
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 350,
+                  damping: 14,
+                }}
+                style={{
+                  marginRight: char === " " ? "0.6rem" : "0.01em",
+                }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </motion.h1>
+
+          <motion.p
+            className={`${inter.className} text-stone-600 text-sm sm:text-base md:text-xl font-medium tracking-wide max-w-xl mx-auto pt-2`}
+            variants={itemVariants}
+          >
+            Architecting robust full-stack platforms, scalable APIs, and high-performance interactive interfaces.
           </motion.p>
         </motion.div>
       </div>
 
-      <motion.div 
-        className='w-full flex py-10'
+      {/* Bottom Editorial Strip: Discipline & Scroll Cue */}
+      <motion.div
+        className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-4 border-t border-stone-200/80"
         variants={itemVariants}
       >
-        <div className='relative h-8 flex items-center'>
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={currentRole}
-              className={`${inter.className} text-lg md:text-xl whitespace-nowrap font-semibold text-stone-600 absolute`}
-              variants={roleVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              {roles[currentRole]}
-            </motion.p>
-          </AnimatePresence>
+        <div className="flex items-center gap-3 h-8">
+          <span className="font-mono text-xs text-stone-400 uppercase tracking-widest">
+            // FOCUS:
+          </span>
+          <div className="relative overflow-hidden h-6 flex items-center min-w-[200px]">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={currentRole}
+                className={`${inter.className} text-sm sm:text-base font-bold text-stone-800 tracking-tight absolute`}
+                variants={roleVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+              >
+                {roles[currentRole]}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Minimalist Scroll Cue */}
+        <div className="flex items-center gap-3 text-xs font-mono tracking-widest text-stone-400 uppercase">
+          <span>Scroll to Explore</span>
+          <motion.span
+            animate={{ y: [0, 4, 0] }}
+            transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
+            className="text-stone-700 font-bold"
+          >
+            ↓
+          </motion.span>
         </div>
       </motion.div>
     </motion.div>
-  )
+  );
 }
 
-export default Hero
+export default Hero;

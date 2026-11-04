@@ -1,8 +1,42 @@
 @import "tailwindcss";
 
-body{
-    background-color: black;
-    scroll-behavior: smooth;
+:root {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+html {
+  background-color: #050908;
+  color-scheme: dark;
+}
+
+body {
+  background: #050908;
+  color: #ededed;
+  cursor: none;
+  overflow-x: hidden;
+}
+
+/* Cinematic Film Grain Overlay */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Ambient glow accent */
+.ambient-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.12;
+  mix-blend-mode: screen;
 }
 
 @keyframes flicker {
@@ -36,38 +70,6 @@ body{
   animation: flicker 4.5s infinite;
 }
 
-.magnetic-cursor {
-  --circle-size: 50px;
-  position: fixed;
-  height: var(--circle-size);
-  width: var(--circle-size);
-  background: white; /* base color */
-  border-radius: 50%;
-  top: calc(var(--circle-size) / 2 * -1);
-  left: calc(var(--circle-size) / 2 * -1);
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference;
-}
-
-.magnetic-cursor {
-  box-shadow: 0 0 12px rgba(255,255,255,0.25);
-}
-
-body {
-  background: #050908;
-}
-
-body {
-  cursor: none;
-}
-
-.invert-blend {
-  color: white;
-  mix-blend-mode: difference;
-  position: relative;
-  z-index: 2;
-}
 /* Hide scrollbar for Chrome, Safari and Opera */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
@@ -75,15 +77,19 @@ body {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .hide-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 body::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 body::-webkit-scrollbar-track {
   background: #050908;
 }
 
+body::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 3px;
+}

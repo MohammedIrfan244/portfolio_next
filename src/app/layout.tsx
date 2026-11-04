@@ -223,7 +223,8 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#050908]`}>
+        <div className="film-grain" aria-hidden="true" />
         {children}
       </body>
     </html>
