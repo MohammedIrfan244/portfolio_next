@@ -73,7 +73,7 @@ function Profile() {
       {/* Editorial Meta Bar */}
       <div className="flex items-center justify-between text-xs font-mono tracking-widest text-stone-400 border-b border-stone-200 pb-4 mb-8 sm:mb-12">
         <div className="flex items-center gap-3">
-          <span className="text-stone-800 font-semibold">// 02</span>
+          <span className="text-stone-800 font-semibold">{"// 02"}</span>
           <span>BIOGRAPHY & CAPABILITIES</span>
         </div>
         <div className="hidden sm:block">
@@ -111,7 +111,7 @@ function Profile() {
           className="space-y-4 md:space-y-6 border-l-2 border-stone-200 pl-6 sm:pl-8"
         >
           <div className="flex items-center gap-3 text-xs font-mono tracking-widest text-stone-400 uppercase">
-            <span>// 02.1</span>
+            <span>{"// 02.1"}</span>
             <h3 className="font-bold text-stone-800 text-sm">Who Am I</h3>
           </div>
           <WordReveal className="text-stone-700 text-base sm:text-lg md:text-xl font-medium leading-relaxed">
@@ -139,7 +139,7 @@ function Profile() {
           className="space-y-6 md:space-y-8 border-l-2 border-stone-200 pl-6 sm:pl-8"
         >
           <div className="flex items-center gap-3 text-xs font-mono tracking-widest text-stone-400 uppercase">
-            <span>// 02.2</span>
+            <span>{"// 02.2"}</span>
             <h3 className="font-bold text-stone-800 text-sm">Architectural Stack & Capabilities</h3>
           </div>
           <p className="text-stone-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl">
@@ -175,7 +175,7 @@ function Profile() {
           className="space-y-4 md:space-y-6 border-l-2 border-stone-200 pl-6 sm:pl-8"
         >
           <div className="flex items-center gap-3 text-xs font-mono tracking-widest text-stone-400 uppercase">
-            <span>// 02.3</span>
+            <span>{"// 02.3"}</span>
             <h3 className="font-bold text-stone-800 text-sm">Outside the Terminal</h3>
           </div>
           <p className="text-stone-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl">

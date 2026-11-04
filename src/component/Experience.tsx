@@ -125,7 +125,7 @@ function Experience() {
       {/* Editorial Meta Bar */}
       <div className="flex items-center justify-between text-xs font-mono tracking-widest text-stone-500 border-b border-stone-800/80 pb-4 mb-8 sm:mb-12">
         <div className="flex items-center gap-3">
-          <span className="text-stone-300 font-semibold">// 03</span>
+          <span className="text-stone-300 font-semibold">{"// 03"}</span>
           <span>TIMELINE & INDUSTRY TRACK</span>
         </div>
         <div className="hidden sm:block">
@@ -210,7 +210,7 @@ function Experience() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/[0.06] pb-4">
                   <div>
                     <span className="font-mono text-xs text-stone-500 uppercase tracking-widest block mb-1">
-                      MILESTONE // 0{idx + 1}
+                      MILESTONE {"//"} 0{idx + 1}
                     </span>
                     <h3
                       className={`${inter.className} text-xl sm:text-2xl md:text-3xl font-bold text-stone-100 group-hover:text-white transition-colors`}

@@ -38,7 +38,7 @@ function Contact() {
       {/* Editorial Meta Bar */}
       <div className="flex items-center justify-between text-xs font-mono tracking-widest text-stone-500 border-b border-stone-800/80 pb-4 mb-12 sm:mb-16">
         <div className="flex items-center gap-3">
-          <span className="text-stone-300 font-semibold">// 04</span>
+          <span className="text-stone-300 font-semibold">{"// 04"}</span>
           <span>DIRECT INQUIRIES & COLLABORATION</span>
         </div>
         <div className="hidden sm:block">

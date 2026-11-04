@@ -227,7 +227,7 @@ function Hero() {
       >
         <div className="flex items-center gap-3 h-8">
           <span className="font-mono text-xs text-stone-400 uppercase tracking-widest">
-            // FOCUS:
+            {"// FOCUS:"}
           </span>
           <div className="relative overflow-hidden h-6 flex items-center min-w-[200px]">
             <AnimatePresence mode="wait">
