@@ -11,7 +11,6 @@ export default function UltraFluidCursor() {
     const dot = dotRef.current;
     if (!circle || !dot) return;
 
-    // Use current viewport center as starting point
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
     let posX = mouseX;
@@ -23,10 +22,10 @@ export default function UltraFluidCursor() {
       mouseX = e.clientX;
       mouseY = e.clientY;
 
-      // Direct pointer dot placement - instantaneous 1:1 response
+      // 1:1 Instant hardware pointer dot
       dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
 
-      // Check contextual target without triggering React re-renders
+      // Check contextual target without React re-renders
       const target = (e.target as HTMLElement)?.closest?.("[data-cursor]") as HTMLElement | null;
       const shouldView = target?.getAttribute("data-cursor") === "view";
 
@@ -45,8 +44,8 @@ export default function UltraFluidCursor() {
     let rafId: number;
 
     const tick = () => {
-      // Snappy, ultra-responsive lerp factor (0.24 = immediate response, zero sluggish lag)
-      const lerp = 0.24;
+      // Super-fast, instantaneous lerp (0.45 = locked tightly to mouse, zero lag)
+      const lerp = 0.45;
       posX += (mouseX - posX) * lerp;
       posY += (mouseY - posY) * lerp;
 
@@ -55,14 +54,14 @@ export default function UltraFluidCursor() {
       const speed = Math.hypot(dx, dy);
 
       if (isViewMode) {
-        // In view mode, stable circle so text is sharp
-        circle.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%) scale(1.6)`;
+        // Fast, crisp circular VIEW pill tracking the mouse with zero sluggishness
+        circle.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%) scale(1.65)`;
       } else {
-        // Fluid subtle squish that immediately relaxes
+        // Fluid squish that relaxes immediately
         const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-        const squish = Math.min(speed * 0.015, 0.45);
+        const squish = Math.min(speed * 0.015, 0.4);
         const scaleX = 1 + squish;
-        const scaleY = 1 - squish * 0.6;
+        const scaleY = 1 - squish * 0.5;
 
         circle.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%) rotate(${angle}deg) scale(${scaleX}, ${scaleY})`;
       }
@@ -82,8 +81,8 @@ export default function UltraFluidCursor() {
     <>
       <style jsx>{`
         .cursor-blob {
-          width: 38px;
-          height: 38px;
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
           background: white;
           mix-blend-mode: difference;
@@ -94,17 +93,14 @@ export default function UltraFluidCursor() {
           z-index: 9999;
           will-change: transform;
           box-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
-          transition: width 0.2s ease, height 0.2s ease;
           display: flex;
           align-items: center;
           justify-content: center;
+          /* No width/height transition that causes layout reflow lag */
         }
 
         .cursor-view-active {
-          width: 76px !important;
-          height: 76px !important;
-          background: white !important;
-          box-shadow: 0 0 28px rgba(255, 255, 255, 0.6) !important;
+          box-shadow: 0 0 24px rgba(255, 255, 255, 0.55) !important;
         }
 
         .cursor-view-text {
@@ -112,11 +108,11 @@ export default function UltraFluidCursor() {
           color: black;
           font-family: monospace;
           font-weight: 700;
-          font-size: 11px;
-          letter-spacing: 0.1em;
+          font-size: 8px;
+          letter-spacing: 0.12em;
           pointer-events: none;
           user-select: none;
-          transition: opacity 0.15s ease;
+          transition: opacity 0.1s ease;
         }
 
         .cursor-view-active .cursor-view-text {
@@ -124,8 +120,8 @@ export default function UltraFluidCursor() {
         }
 
         .cursor-dot {
-          width: 6px;
-          height: 6px;
+          width: 5px;
+          height: 5px;
           border-radius: 50%;
           background: white;
           mix-blend-mode: difference;
@@ -142,12 +138,12 @@ export default function UltraFluidCursor() {
         }
       `}</style>
 
-      {/* Main Responsive Fluid Blob */}
+      {/* Main Fluid Responsive Blob */}
       <div ref={circleRef} className="cursor-blob hidden md:flex">
         <span className="cursor-view-text">VIEW ↗</span>
       </div>
 
-      {/* Center 1:1 Instant Pointer Dot */}
+      {/* 1:1 Instant Pointer Dot */}
       <div ref={dotRef} className="cursor-dot hidden md:inline-block" />
     </>
   );
