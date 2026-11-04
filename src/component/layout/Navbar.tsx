@@ -27,7 +27,7 @@ function Navbar() {
     e.preventDefault();
     if (lenis) {
       lenis.scrollTo(target, {
-        duration: 1.4,
+        duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       });
     }
@@ -45,7 +45,7 @@ function Navbar() {
             : "w-full px-2 sm:px-4 py-2 bg-transparent"
         } ${inter.className}`}
       >
-        {/* Monogram Brand Mark */}
+        {/* Monogram Brand Mark: IRFAN */}
         <a
           href="#"
           onClick={(e) => handleSmoothScroll(e, "top")}
@@ -58,7 +58,7 @@ function Navbar() {
                 : "text-stone-900 group-hover:text-black"
             }`}
           >
-            M. IRFAN
+            IRFAN
           </span>
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
         </a>

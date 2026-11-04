@@ -13,12 +13,13 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
+    // Ultra-responsive, crisp smooth scroll without sluggish delay
     const lenisInstance = new Lenis({
-      duration: 1.3,
+      duration: 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 1.1,
-      touchMultiplier: 1.8,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5,
       infinite: false,
       orientation: "vertical",
       gestureOrientation: "vertical",
@@ -52,4 +53,3 @@ export function useLenis() {
   const context = useContext(SmoothScrollContext);
   return context.lenis;
 }
-

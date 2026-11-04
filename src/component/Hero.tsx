@@ -14,14 +14,16 @@ import { playfairDisplay, inter } from "@/lib/font";
 function Hero() {
   const [currentRole, setCurrentRole] = useState(0);
   const [timeString, setTimeString] = useState<string>("");
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const name = "Mohammed Irfan";
+  const firstName = "Mohammed";
+  const lastName = "Irfan";
+
   const roleIndex = useTransform(
     scrollYProgress,
     [0, 0.2, 0.4, 0.6, 0.8, 1],
@@ -114,7 +116,7 @@ function Hero() {
   return (
     <motion.div
       ref={containerRef}
-      className="w-full pt-28 pb-8 select-none min-h-screen px-4 sm:px-6 md:px-7 rounded-b-3xl md:rounded-b-4xl lg:px-10 flex flex-col justify-between bg-white relative overflow-hidden shadow-2xl"
+      className="w-full pt-24 sm:pt-28 pb-8 select-none min-h-screen px-4 sm:px-6 md:px-7 rounded-b-3xl md:rounded-b-4xl lg:px-10 flex flex-col justify-between bg-white relative overflow-hidden shadow-2xl"
       variants={containerVariants}
       initial="initial"
       animate="animate"
@@ -147,7 +149,7 @@ function Hero() {
       </motion.div>
 
       {/* Centerpiece Typographic Stage */}
-      <div className="flex w-full items-center justify-center py-12 md:py-20">
+      <div className="flex w-full items-center justify-center py-8 md:py-16">
         <motion.div
           className="space-y-3 sm:space-y-4 text-center max-w-4xl"
           style={{ scale: nameScale, y: nameY }}
@@ -159,31 +161,54 @@ function Hero() {
             <span>[ SYSTEM DESIGN & FULL-STACK CRAFT ]</span>
           </motion.div>
 
+          {/* Guaranteed 2-Line Name: Mohammed on Line 1, Irfan on Line 2 */}
           <motion.h1
-            className={`${playfairDisplay.className} text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-stone-900 font-medium tracking-tight flex flex-wrap justify-center`}
+            className={`${playfairDisplay.className} text-6xl sm:text-7xl md:text-8xl lg:text-[110px] text-stone-900 font-medium tracking-tight flex flex-col items-center leading-[0.92] sm:leading-[0.90]`}
             variants={itemVariants}
           >
-            {name.split("").map((char, i) => (
-              <motion.span
-                key={i}
-                className="inline-block cursor-default"
-                whileHover={{
-                  scale: 1.35,
-                  y: -8,
-                  color: "#050908",
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 350,
-                  damping: 14,
-                }}
-                style={{
-                  marginRight: char === " " ? "0.6rem" : "0.01em",
-                }}
-              >
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
-            ))}
+            {/* Line 1: Mohammed */}
+            <span className="whitespace-nowrap flex justify-center">
+              {firstName.split("").map((char, i) => (
+                <motion.span
+                  key={`first-${i}`}
+                  className="inline-block cursor-default"
+                  whileHover={{
+                    scale: 1.25,
+                    y: -6,
+                    color: "#050908",
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 350,
+                    damping: 14,
+                  }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </span>
+
+            {/* Line 2: Irfan */}
+            <span className="whitespace-nowrap flex justify-center mt-1 sm:mt-2">
+              {lastName.split("").map((char, i) => (
+                <motion.span
+                  key={`last-${i}`}
+                  className="inline-block cursor-default"
+                  whileHover={{
+                    scale: 1.25,
+                    y: -6,
+                    color: "#050908",
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 350,
+                    damping: 14,
+                  }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </span>
           </motion.h1>
 
           <motion.p

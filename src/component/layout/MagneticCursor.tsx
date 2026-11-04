@@ -1,112 +1,71 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function UltraFluidCursor() {
   const circleRef = useRef<HTMLDivElement | null>(null);
   const dotRef = useRef<HTMLDivElement | null>(null);
-  const textRef = useRef<HTMLSpanElement | null>(null);
-  const [cursorType, setCursorType] = useState<"default" | "view" | "pointer">("default");
 
   useEffect(() => {
-    const circleElement = circleRef.current;
-    const dotElement = dotRef.current;
-    if (!circleElement || !dotElement) return;
+    const circle = circleRef.current;
+    const dot = dotRef.current;
+    if (!circle || !dot) return;
 
-    const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    const velocity = { x: 0, y: 0 };
-    const acceleration = { x: 0, y: 0 };
+    // Use current viewport center as starting point
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let posX = mouseX;
+    let posY = mouseY;
 
-    const scale = { x: 1, y: 1 };
-    let rotation = 0;
-    let squish = 0;
-    let currentType: "default" | "view" | "pointer" = "default";
+    let isViewMode = false;
 
-    const moveHandler = (e: MouseEvent) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
 
-      // Detect contextual cursor targets
+      // Direct pointer dot placement - instantaneous 1:1 response
+      dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+
+      // Check contextual target without triggering React re-renders
       const target = (e.target as HTMLElement)?.closest?.("[data-cursor]") as HTMLElement | null;
-      const detected = target ? (target.getAttribute("data-cursor") as "default" | "view" | "pointer") : null;
+      const shouldView = target?.getAttribute("data-cursor") === "view";
 
-      const interactive = (e.target as HTMLElement)?.closest?.("a, button, input, textarea");
-
-      let nextType: "default" | "view" | "pointer" = "default";
-      if (detected === "view") {
-        nextType = "view";
-      } else if (detected === "pointer" || interactive) {
-        nextType = "pointer";
-      }
-
-      if (nextType !== currentType) {
-        currentType = nextType;
-        setCursorType(nextType);
+      if (shouldView !== isViewMode) {
+        isViewMode = shouldView;
+        if (isViewMode) {
+          circle.classList.add("cursor-view-active");
+        } else {
+          circle.classList.remove("cursor-view-active");
+        }
       }
     };
 
-    window.addEventListener("mousemove", moveHandler, { passive: true });
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
 
     let rafId: number;
 
     const tick = () => {
-      // Physics-based movement
-      const dx = mouse.x - pos.x;
-      const dy = mouse.y - pos.y;
+      // Snappy, ultra-responsive lerp factor (0.24 = immediate response, zero sluggish lag)
+      const lerp = 0.24;
+      posX += (mouseX - posX) * lerp;
+      posY += (mouseY - posY) * lerp;
 
-      // Spring acceleration
-      acceleration.x = dx * 0.005;
-      acceleration.y = dy * 0.005;
+      const dx = mouseX - posX;
+      const dy = mouseY - posY;
+      const speed = Math.hypot(dx, dy);
 
-      velocity.x += acceleration.x;
-      velocity.y += acceleration.y;
-
-      // Friction
-      velocity.x *= 0.88;
-      velocity.y *= 0.88;
-
-      pos.x += velocity.x;
-      pos.y += velocity.y;
-
-      const speed = Math.sqrt(velocity.x ** 2 + velocity.y ** 2);
-
-      if (speed > 0.1) {
-        const targetRotation = Math.atan2(velocity.y, velocity.x) * (180 / Math.PI);
-        const rotDiff = ((((targetRotation - rotation + 180) % 360) + 360) % 360) - 180;
-        rotation += rotDiff * 0.3;
-      }
-
-      // If in "view" mode, keep it circular and stable so text is legible
-      if (currentType === "view") {
-        scale.x += (1.6 - scale.x) * 0.2;
-        scale.y += (1.6 - scale.y) * 0.2;
-        rotation += (0 - rotation) * 0.2;
-      } else if (currentType === "pointer") {
-        scale.x += (1.3 - scale.x) * 0.2;
-        scale.y += (1.3 - scale.y) * 0.2;
+      if (isViewMode) {
+        // In view mode, stable circle so text is sharp
+        circle.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%) scale(1.6)`;
       } else {
-        const targetSquish = Math.min(speed * 0.045, 2.0);
-        squish += (targetSquish - squish) * 0.2;
+        // Fluid subtle squish that immediately relaxes
+        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+        const squish = Math.min(speed * 0.015, 0.45);
+        const scaleX = 1 + squish;
+        const scaleY = 1 - squish * 0.6;
 
-        const scaleX = 1 + squish * 1.1;
-        const scaleY = Math.max(1 - squish * 0.8, 0.25);
-
-        scale.x += (scaleX - scale.x) * 0.2;
-        scale.y += (scaleY - scale.y) * 0.2;
+        circle.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%) rotate(${angle}deg) scale(${scaleX}, ${scaleY})`;
       }
-
-      circleElement.style.transform = `
-        translate3d(${pos.x}px, ${pos.y}px, 0)
-        translate(-50%, -50%)
-        rotate(${rotation}deg)
-        scale(${scale.x}, ${scale.y})
-      `;
-
-      dotElement.style.transform = `
-        translate3d(${mouse.x}px, ${mouse.y}px, 0)
-        translate(-50%, -50%)
-      `;
 
       rafId = requestAnimationFrame(tick);
     };
@@ -114,7 +73,7 @@ export default function UltraFluidCursor() {
     rafId = requestAnimationFrame(tick);
 
     return () => {
-      window.removeEventListener("mousemove", moveHandler);
+      window.removeEventListener("mousemove", onMouseMove);
       cancelAnimationFrame(rafId);
     };
   }, []);
@@ -122,54 +81,74 @@ export default function UltraFluidCursor() {
   return (
     <>
       <style jsx>{`
-        @keyframes blob {
-          0%, 100% { border-radius: 50% 45% 47% 53% / 53% 47% 45% 50%; }
-          25% { border-radius: 47% 53% 50% 45% / 45% 50% 53% 47%; }
-          50% { border-radius: 53% 47% 45% 50% / 50% 45% 47% 53%; }
-          75% { border-radius: 45% 50% 53% 47% / 47% 53% 50% 45%; }
+        .cursor-blob {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background: white;
+          mix-blend-mode: difference;
+          pointer-events: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 9999;
+          will-change: transform;
+          box-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
+          transition: width 0.2s ease, height 0.2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
-        .blob-cursor {
-          animation: blob 4s ease-in-out infinite;
+
+        .cursor-view-active {
+          width: 76px !important;
+          height: 76px !important;
+          background: white !important;
+          box-shadow: 0 0 28px rgba(255, 255, 255, 0.6) !important;
         }
-        .view-cursor {
-          border-radius: 9999px !important;
-          animation: none !important;
+
+        .cursor-view-text {
+          opacity: 0;
+          color: black;
+          font-family: monospace;
+          font-weight: 700;
+          font-size: 11px;
+          letter-spacing: 0.1em;
+          pointer-events: none;
+          user-select: none;
+          transition: opacity 0.15s ease;
+        }
+
+        .cursor-view-active .cursor-view-text {
+          opacity: 1;
+        }
+
+        .cursor-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: white;
+          mix-blend-mode: difference;
+          pointer-events: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 10000;
+          will-change: transform;
+        }
+
+        .cursor-view-active ~ .cursor-dot {
+          opacity: 0;
         }
       `}</style>
 
-      {/* Main fluid blob / contextual pill */}
-      <div
-        ref={circleRef}
-        className={`hidden md:flex items-center justify-center fixed top-0 left-0 w-12 h-12 bg-white pointer-events-none mix-blend-difference z-50 transition-[width,height] duration-200 ${
-          cursorType === "view" ? "view-cursor !w-20 !h-20" : "blob-cursor"
-        }`}
-        style={{
-          willChange: "transform",
-          filter: "blur(0.5px)",
-          boxShadow: "0 0 24px rgba(255,255,255,0.35)",
-        }}
-      >
-        <span
-          ref={textRef}
-          className={`font-mono font-bold text-[10px] tracking-widest text-black select-none pointer-events-none transition-opacity duration-200 ${
-            cursorType === "view" ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          VIEW ↗
-        </span>
+      {/* Main Responsive Fluid Blob */}
+      <div ref={circleRef} className="cursor-blob hidden md:flex">
+        <span className="cursor-view-text">VIEW ↗</span>
       </div>
 
-      {/* Center dot at exact mouse pointer */}
-      <div
-        ref={dotRef}
-        className={`fixed top-0 hidden md:inline-block left-0 w-2.5 h-2.5 bg-white rounded-full pointer-events-none mix-blend-difference z-[51] transition-opacity duration-200 ${
-          cursorType === "view" ? "opacity-0" : "opacity-100"
-        }`}
-        style={{
-          willChange: "transform",
-          boxShadow: "0 0 6px rgba(255,255,255,0.9)",
-        }}
-      />
+      {/* Center 1:1 Instant Pointer Dot */}
+      <div ref={dotRef} className="cursor-dot hidden md:inline-block" />
     </>
   );
 }

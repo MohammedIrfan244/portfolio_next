@@ -3,17 +3,30 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { playfairDisplay, inter } from "@/lib/font";
-import { FiPhoneCall, FiGithub, FiLinkedin, FiDownload, FiCheck, FiCopy } from "react-icons/fi";
+import { FiPhoneCall, FiGithub, FiLinkedin, FiDownload, FiCheck, FiCopy, FiArrowUp } from "react-icons/fi";
+import { useLenis } from "@/component/providers/SmoothScrollProvider";
 
 function Contact() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
+  const lenis = useLenis();
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
     navigator.clipboard.writeText("irfanndmb@gmail.com");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleScrollTop = () => {
+    if (lenis) {
+      lenis.scrollTo("top", {
+        duration: 1.4,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -131,17 +144,19 @@ function Contact() {
           </div>
         </div>
 
-        {/* Colophon & Footer */}
-        <div className="pt-20 sm:pt-24 border-t border-stone-800/60 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-stone-500 gap-4">
-          <div>
-            <span>DESIGNED & ENGINEERED BY MOHAMMED IRFAN</span>
-          </div>
-          <div>
-            <span>NEXT.JS 16 · REACT 19 · FRAMER MOTION · LENIS</span>
-          </div>
-          <div>
-            <span>© {new Date().getFullYear()} ALL RIGHTS RESERVED</span>
-          </div>
+        {/* Minimalist Single Scroll-Up Action (Cleaned from copyright & tech stack) */}
+        <div className="pt-20 sm:pt-28 border-t border-stone-800/60 flex items-center justify-center">
+          <motion.button
+            onClick={handleScrollTop}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="group flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.05] hover:bg-white/15 border border-white/10 text-stone-300 hover:text-white transition-all duration-300 text-xs font-mono tracking-widest uppercase cursor-pointer"
+          >
+            <span>Back to Top</span>
+            <span className="p-1.5 rounded-full bg-white/10 group-hover:bg-white/20 transition-colors">
+              <FiArrowUp className="w-3.5 h-3.5 text-white transition-transform group-hover:-translate-y-0.5 duration-300" />
+            </span>
+          </motion.button>
         </div>
       </motion.div>
     </section>

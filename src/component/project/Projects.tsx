@@ -1,203 +1,130 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView, Variants } from "framer-motion";
-import { playfairDisplay } from "@/lib/font";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { playfairDisplay, inter } from "@/lib/font";
 import projects from "@/lib/data/projects";
 import ProjectCard from "./ProjectCard";
-import { useLenis } from "@/component/providers/SmoothScrollProvider";
+import { FiGithub, FiArrowRight } from "react-icons/fi";
 
 function Projects() {
-  const headingRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(headingRef, { once: false, margin: "100px 0px -20% 0px" });
-  const isGridInView = useInView(gridRef, { once: true, margin: "0px 0px -15% 0px" });
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
-  const lenis = useLenis();
+  const targetRef = useRef<HTMLDivElement>(null);
 
-  // Listen to the single shared root Lenis instance
-  useEffect(() => {
-    if (!lenis) return;
+  // Map vertical scroll progress of this 320vh section into horizontal translateX
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"],
+  });
 
-    const handleScroll = () => {
-      if (!headingRef.current) return;
-      const rect = headingRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const elementTop = rect.top;
-      const elementHeight = rect.height;
-
-      const startOffset = windowHeight * 0.85;
-      const endOffset = -elementHeight;
-      const totalDistance = startOffset - endOffset;
-      const currentDistance = startOffset - elementTop;
-      const calculatedProgress = Math.max(0, Math.min(1, currentDistance / totalDistance));
-
-      setScrollProgress(calculatedProgress);
-    };
-
-    lenis.on("scroll", handleScroll);
-    return () => {
-      lenis.off("scroll", handleScroll);
-    };
-  }, [lenis]);
-
-  const text: string = "My Works.";
-  const letters: string[] = text.split("");
-
-  const letterVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-      scale: 0.2,
-    },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        delay: i * 0.015,
-        duration: 0.35,
-        ease: [0.42, 0, 0.58, 1],
-      },
-    }),
-  };
-
-  const gridVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 40,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.42, 0, 0.58, 1],
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const cardVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 40,
-      scale: 0.98,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.42, 0, 0.58, 1],
-      },
-    },
-  };
-
-  const getLetterOpacity = (index: number): number => {
-    if (!isInView) return 0;
-    const letterProgress: number = (index + 1) / letters.length;
-    const appearThreshold: number = letterProgress * 0.3;
-    const disappearThreshold: number = 0.7 + letterProgress * 0.3;
-
-    if (scrollProgress < appearThreshold) {
-      return 0;
-    } else if (scrollProgress > disappearThreshold) {
-      return Math.max(0, 1 - (scrollProgress - disappearThreshold) / (1 - disappearThreshold));
-    } else {
-      return 1;
-    }
-  };
-
-  const getColSpan = (index: number) => {
-    switch (index) {
-      case 0:
-        return "md:col-span-7 md:row-span-2";
-      case 1:
-        return "md:col-span-5 md:row-span-2";
-      case 2:
-        return "md:col-span-5 md:row-span-1";
-      case 3:
-        return "md:col-span-7 md:row-span-1";
-      default:
-        return "md:col-span-6 md:row-span-1";
-    }
-  };
+  // Calculate horizontal translation across all cards
+  // Smooth GPU translation from 0% to -68%
+  const x = useTransform(scrollYProgress, [0, 1], ["2%", "-72%"]);
+  const progressBarWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section
+      ref={targetRef}
       id="projects"
-      className="relative px-4 sm:px-6 md:px-7 lg:px-10 py-16 sm:py-20 md:py-28 space-y-10 md:space-y-16 w-full bg-[#050908] overflow-hidden"
+      className="relative bg-[#050908] text-white w-full h-[320vh]"
     >
-      {/* Subtle ambient lighting behind grid */}
-      <div className="ambient-glow -top-32 -left-32 w-96 h-96 bg-stone-700/10" />
-      <div className="ambient-glow top-1/2 -right-32 w-[500px] h-[500px] bg-stone-500/5" />
+      {/* Sticky Viewport Container */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between py-6 sm:py-8 md:py-10 px-4 sm:px-6 md:px-8 lg:px-12 select-none">
+        {/* Subtle Ambient Specular Background */}
+        <div className="ambient-glow -top-32 -left-32 w-96 h-96 bg-stone-700/10 pointer-events-none" />
+        <div className="ambient-glow bottom-0 right-0 w-[500px] h-[500px] bg-stone-500/5 pointer-events-none" />
 
-      {/* Editorial Header Section */}
-      <div className="space-y-4">
-        {/* Architectural Metadata Bar */}
-        <div className="flex items-center justify-between text-xs font-mono tracking-widest text-stone-500 border-b border-stone-800/80 pb-4">
-          <div className="flex items-center gap-3">
-            <span className="text-stone-300 font-semibold">// 01</span>
-            <span>ARCHIVE & ENGINEERING</span>
+        {/* Top Header & Architectural Meta */}
+        <div className="relative z-10 w-full flex flex-col gap-3 border-b border-stone-800/80 pb-4">
+          <div className="flex items-center justify-between text-xs font-mono tracking-widest text-stone-500">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <span className="text-stone-200 font-semibold">// 01</span>
+              <span>SELECTED PRODUCTIONS</span>
+            </div>
+            <div className="flex items-center gap-2 text-stone-400">
+              <span className="hidden sm:inline">[ HORIZONTAL ARCHIVE ]</span>
+              <span>04 FEATURED</span>
+            </div>
           </div>
-          <div className="hidden sm:block">
-            <span>[ {String(projects.length).padStart(2, "0")} SELECTED PRODUCTIONS ]</span>
+
+          <div className="flex items-baseline justify-between">
+            <h2
+              className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight ${playfairDisplay.className}`}
+            >
+              My Works.
+            </h2>
+            <span className="text-xs font-mono text-stone-400 uppercase tracking-widest hidden md:inline-block">
+              Scroll to explore reel →
+            </span>
           </div>
         </div>
 
-        {/* Massive Serif Title */}
-        <div ref={headingRef} className="relative pt-2">
-          <h2
-            className={`font-thin text-7xl sm:text-8xl md:text-9xl text-white ${playfairDisplay.className} tracking-tight`}
+        {/* Horizontal Reel Track (Driven by vertical scroll with GPU hardware acceleration) */}
+        <div className="relative z-10 w-full flex items-center overflow-visible py-2 sm:py-4">
+          <motion.div
+            style={{ x }}
+            className="flex gap-5 sm:gap-7 md:gap-8 items-center will-change-transform"
           >
-            {letters.map((letter: string, index: number) => {
-              const opacity = getLetterOpacity(index);
+            {projects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
+            ))}
 
-              return (
-                <motion.span
-                  key={`${letter}-${index}`}
-                  custom={index}
-                  variants={letterVariants}
-                  initial="hidden"
-                  animate={isInView ? "visible" : "hidden"}
-                  style={{
-                    display: "inline-block",
-                    opacity,
-                    transform: `translateY(${(1 - opacity) * 20}px)`,
-                  }}
-                  className="relative"
+            {/* Final Slide: GitHub & Comprehensive Archive Link */}
+            <div className="w-[80vw] sm:w-[420px] md:w-[460px] h-[64vh] sm:h-[66vh] md:h-[68vh] flex-shrink-0 flex items-center justify-center">
+              <div className="w-full h-full p-8 sm:p-10 bg-stone-950/80 border border-white/[0.08] hover:border-white/20 transition-all duration-300 rounded-2xl flex flex-col justify-between">
+                <div className="space-y-3">
+                  <span className="font-mono text-xs text-stone-500 uppercase tracking-widest block">
+                    ARCHIVE // MORE
+                  </span>
+                  <h3
+                    className={`${playfairDisplay.className} text-3xl sm:text-4xl text-white font-medium`}
+                  >
+                    Explore my Github.
+                  </h3>
+                  <p className={`${inter.className} text-stone-400 text-sm leading-relaxed pt-2`}>
+                    Browse client tools, open-source utilities, full-stack microservices, and experiments on GitHub.
+                  </p>
+                </div>
+
+                <a
+                  href="https://github.com/MohammedIrfan244"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between p-4 bg-white/[0.05] hover:bg-white/[0.12] border border-white/10 rounded-xl text-white transition-all duration-300"
                 >
-                  {letter === " " ? "\u00A0" : letter}
-                </motion.span>
-              );
-            })}
-          </h2>
+                  <div className="flex items-center gap-3">
+                    <FiGithub className="w-5 h-5" />
+                    <span className="font-mono text-xs sm:text-sm font-semibold tracking-wider">
+                      github.com/MohammedIrfan244
+                    </span>
+                  </div>
+                  <FiArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Bottom Status & Progress Indicator Bar */}
+        <div className="relative z-10 w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-3 border-t border-stone-800/80 text-xs font-mono text-stone-500">
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <span className="uppercase tracking-widest text-stone-400">Reel Progress:</span>
+            {/* Horizontal progress bar */}
+            <div className="h-[2px] w-36 sm:w-48 bg-stone-800 rounded-full overflow-hidden">
+              <motion.div
+                style={{ width: progressBarWidth }}
+                className="h-full bg-stone-200"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 text-stone-400">
+            <span>[ 01 — 04 ]</span>
+            <span>•</span>
+            <span>NEXT SECTION: ABOUT ME ↓</span>
+          </div>
         </div>
       </div>
-
-      {/* Interactive Project Showcase Grid */}
-      <motion.div
-        ref={gridRef}
-        variants={gridVariants}
-        initial="hidden"
-        animate={isGridInView ? "visible" : "hidden"}
-        className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 md:gap-7 grid-flow-row-dense auto-rows-[380px] md:auto-rows-[340px]"
-      >
-        {projects.map((project, index) => {
-          const isLarge = index === 0 || index === 1;
-          return (
-            <motion.div
-              key={project.id}
-              variants={cardVariants}
-              className={`${getColSpan(index)} h-full w-full`}
-            >
-              <ProjectCard project={project} index={index} variant={isLarge ? "large" : "small"} />
-            </motion.div>
-          );
-        })}
-      </motion.div>
     </section>
   );
 }
