@@ -13,7 +13,7 @@ import { SmoothScrollProvider } from "@/component/providers/SmoothScrollProvider
 function Theme() {
   return (
     <SmoothScrollProvider>
-      <main className="relative min-h-screen bg-[#050908] text-white selection:bg-white selection:text-black">
+      <main className="relative min-h-screen bg-[#050908] text-stone-100 selection:bg-stone-200 selection:text-stone-900">
         <MagneticCursor />
         <Navbar />
         <Hero />

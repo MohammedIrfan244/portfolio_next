@@ -68,7 +68,7 @@ function Profile() {
     <section
       ref={containerRef}
       id="profile"
-      className="relative px-6 md:px-7 lg:px-10 py-16 sm:py-20 md:py-28 rounded-3xl md:rounded-4xl w-full bg-white text-stone-900 overflow-hidden shadow-2xl"
+      className="relative px-6 md:px-7 lg:px-10 py-16 sm:py-20 md:py-28 rounded-3xl md:rounded-4xl w-full bg-[#fafaf8] text-stone-900 overflow-hidden shadow-2xl"
     >
       {/* Editorial Meta Bar */}
       <div className="flex items-center justify-between text-xs font-mono tracking-widest text-stone-400 border-b border-stone-200 pb-4 mb-8 sm:mb-12">
@@ -119,11 +119,11 @@ function Profile() {
           </WordReveal>
           <p className="text-stone-600 text-sm sm:text-base leading-relaxed pt-2">
             Previously, I engineered production-scale ERP and CRM platforms at{" "}
-            <span className="font-bold text-black border-b border-black/30 pb-0.5">
+            <span className="font-bold text-stone-900 border-b border-stone-800/30 pb-0.5">
               Willowy Infotech
             </span>
             , streamlining complex business workflows, and spent a rigorous year delivering production MERN solutions during an intensive development tenure at{" "}
-            <span className="font-bold text-black border-b border-black/30 pb-0.5">
+            <span className="font-bold text-stone-900 border-b border-stone-800/30 pb-0.5">
               BridgeOn
             </span>
             .

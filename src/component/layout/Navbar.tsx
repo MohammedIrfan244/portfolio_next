@@ -92,8 +92,8 @@ function Navbar() {
             <span
               className={`font-mono text-xs sm:text-sm font-bold tracking-widest transition-colors duration-700 ${
                 isScrolled
-                  ? "text-white group-hover:text-stone-300"
-                  : "text-stone-900 group-hover:text-black"
+                  ? "text-stone-100 group-hover:text-stone-300"
+                  : "text-stone-900 group-hover:text-stone-950"
               }`}
             >
               IRFAN
@@ -115,8 +115,8 @@ function Navbar() {
                 onClick={(e) => handleSmoothScroll(e, item.href)}
                 className={`relative px-2.5 sm:px-3.5 py-1 text-xs sm:text-sm font-medium tracking-wide rounded-full select-none transition-colors duration-700 ${
                   isScrolled
-                    ? "text-stone-300 hover:text-white hover:bg-white/10"
-                    : "text-stone-600 hover:text-black hover:bg-stone-200/50"
+                    ? "text-stone-300 hover:text-stone-100 hover:bg-white/10"
+                    : "text-stone-600 hover:text-stone-950 hover:bg-stone-200/50"
                 }`}
               >
                 {item.label}

@@ -84,7 +84,7 @@ export default function UltraFluidCursor() {
           width: 44px;
           height: 44px;
           border-radius: 50%;
-          background: white;
+          background: #fafaf9;
           mix-blend-mode: difference;
           pointer-events: none;
           position: fixed;
@@ -92,7 +92,7 @@ export default function UltraFluidCursor() {
           left: 0;
           z-index: 9999;
           will-change: transform;
-          box-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
+          box-shadow: 0 0 16px rgba(250, 250, 249, 0.4);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -100,12 +100,12 @@ export default function UltraFluidCursor() {
         }
 
         .cursor-view-active {
-          box-shadow: 0 0 24px rgba(255, 255, 255, 0.55) !important;
+          box-shadow: 0 0 24px rgba(250, 250, 249, 0.55) !important;
         }
 
         .cursor-view-text {
           opacity: 0;
-          color: black;
+          color: #0c0a09;
           font-family: monospace;
           font-weight: 700;
           font-size: 8px;
@@ -123,7 +123,7 @@ export default function UltraFluidCursor() {
           width: 5px;
           height: 5px;
           border-radius: 50%;
-          background: white;
+          background: #fafaf9;
           mix-blend-mode: difference;
           pointer-events: none;
           position: fixed;

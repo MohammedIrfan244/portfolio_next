@@ -72,7 +72,7 @@ function Contact() {
             <motion.a
               href="mailto:irfanndmb@gmail.com"
               whileHover={{ scale: 1.02 }}
-              className={`inline-block text-2xl sm:text-4xl md:text-5xl font-medium text-white hover:text-stone-300 transition-colors ${playfairDisplay.className}`}
+              className={`inline-block text-2xl sm:text-4xl md:text-5xl font-medium text-stone-100 hover:text-stone-300 transition-colors ${playfairDisplay.className}`}
             >
               irfanndmb@gmail.com
             </motion.a>
@@ -80,7 +80,7 @@ function Contact() {
             <button
               onClick={handleCopyEmail}
               aria-label="Copy email address"
-              className="p-2.5 rounded-full bg-white/[0.06] hover:bg-white/20 border border-white/10 text-stone-300 hover:text-white transition-all duration-300"
+              className="p-2.5 rounded-full bg-white/[0.06] hover:bg-white/20 border border-white/10 text-stone-300 hover:text-stone-100 transition-all duration-300"
             >
               {copied ? <FiCheck className="w-4 h-4 text-emerald-400" /> : <FiCopy className="w-4 h-4" />}
             </button>
@@ -102,7 +102,7 @@ function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               href="tel:+918891555811"
-              className="flex items-center gap-2 px-4 py-2 bg-white/[0.05] hover:bg-white/15 border border-white/10 text-stone-200 hover:text-white text-xs sm:text-sm font-mono tracking-wider transition-all duration-300"
+              className="flex items-center gap-2 px-4 py-2 bg-white/[0.05] hover:bg-white/15 border border-white/10 text-stone-200 hover:text-stone-100 text-xs sm:text-sm font-mono tracking-wider transition-all duration-300"
             >
               <FiPhoneCall className="w-3.5 h-3.5 text-emerald-400" />
               <span>+91 889155 5811</span>
@@ -113,7 +113,7 @@ function Contact() {
               rel="noopener noreferrer"
               href="https://github.com/MohammedIrfan244"
               aria-label="GitHub Profile"
-              className="flex items-center gap-2 px-4 py-2 bg-white/[0.05] hover:bg-white/15 border border-white/10 text-stone-200 hover:text-white text-xs sm:text-sm font-mono tracking-wider transition-all duration-300"
+              className="flex items-center gap-2 px-4 py-2 bg-white/[0.05] hover:bg-white/15 border border-white/10 text-stone-200 hover:text-stone-100 text-xs sm:text-sm font-mono tracking-wider transition-all duration-300"
             >
               <FiGithub className="w-3.5 h-3.5" />
               <span>GitHub</span>
@@ -124,7 +124,7 @@ function Contact() {
               rel="noopener noreferrer"
               href="https://www.linkedin.com/in/mohammed-irfan-n"
               aria-label="LinkedIn Profile"
-              className="flex items-center gap-2 px-4 py-2 bg-white/[0.05] hover:bg-white/15 border border-white/10 text-stone-200 hover:text-white text-xs sm:text-sm font-mono tracking-wider transition-all duration-300"
+              className="flex items-center gap-2 px-4 py-2 bg-white/[0.05] hover:bg-white/15 border border-white/10 text-stone-200 hover:text-stone-100 text-xs sm:text-sm font-mono tracking-wider transition-all duration-300"
             >
               <FiLinkedin className="w-3.5 h-3.5 text-sky-400" />
               <span>LinkedIn</span>
@@ -150,11 +150,11 @@ function Contact() {
             onClick={handleScrollTop}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.05] hover:bg-white/15 border border-white/10 text-stone-300 hover:text-white transition-all duration-300 text-xs font-mono tracking-widest uppercase cursor-pointer"
+            className="group flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.05] hover:bg-white/15 border border-white/10 text-stone-300 hover:text-stone-100 transition-all duration-300 text-xs font-mono tracking-widest uppercase cursor-pointer"
           >
             <span>Back to Top</span>
             <span className="p-1.5 rounded-full bg-white/10 group-hover:bg-white/20 transition-colors">
-              <FiArrowUp className="w-3.5 h-3.5 text-white transition-transform group-hover:-translate-y-0.5 duration-300" />
+              <FiArrowUp className="w-3.5 h-3.5 text-stone-200 transition-transform group-hover:-translate-y-0.5 duration-300" />
             </span>
           </motion.button>
         </div>

@@ -189,7 +189,7 @@ function Experience() {
                   cx={cx}
                   cy={cy}
                   r="7"
-                  fill="#ffffff"
+                  fill="#f5f5f4"
                   filter="url(#glow)"
                 />
               </svg>
@@ -213,7 +213,7 @@ function Experience() {
                       MILESTONE {"//"} 0{idx + 1}
                     </span>
                     <h3
-                      className={`${inter.className} text-xl sm:text-2xl md:text-3xl font-bold text-stone-100 group-hover:text-white transition-colors`}
+                      className={`${inter.className} text-xl sm:text-2xl md:text-3xl font-bold text-stone-100 group-hover:text-stone-50 transition-colors`}
                     >
                       {exp.role}
                     </h3>

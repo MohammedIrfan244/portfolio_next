@@ -116,7 +116,7 @@ function Hero() {
   return (
     <motion.div
       ref={containerRef}
-      className="w-full pt-24 sm:pt-28 pb-8 select-none min-h-screen px-4 sm:px-6 md:px-7 rounded-b-3xl md:rounded-b-4xl lg:px-10 flex flex-col justify-between bg-white relative overflow-hidden shadow-2xl"
+      className="w-full pt-24 sm:pt-28 pb-8 select-none min-h-screen px-4 sm:px-6 md:px-7 rounded-b-3xl md:rounded-b-4xl lg:px-10 flex flex-col justify-between bg-[#fafaf8] relative overflow-hidden shadow-2xl"
       variants={containerVariants}
       initial="initial"
       animate="animate"
@@ -210,13 +210,6 @@ function Hero() {
               ))}
             </span>
           </motion.h1>
-
-          <motion.p
-            className={`${inter.className} text-stone-600 text-sm sm:text-base md:text-xl font-medium tracking-wide max-w-xl mx-auto pt-2`}
-            variants={itemVariants}
-          >
-            Architecting robust full-stack platforms, scalable APIs, and high-performance interactive interfaces.
-          </motion.p>
         </motion.div>
       </div>
 

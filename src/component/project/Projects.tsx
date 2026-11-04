@@ -100,7 +100,7 @@ function Projects() {
         {/* Massive Serif Title */}
         <div ref={headingRef} className="relative pt-2">
           <h2
-            className={`font-thin text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white ${playfairDisplay.className} tracking-tight`}
+            className={`font-thin text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-stone-100 ${playfairDisplay.className} tracking-tight`}
           >
             {letters.map((letter: string, index: number) => (
               <motion.span
@@ -151,14 +151,14 @@ function Projects() {
               <span className="text-stone-300 tracking-widest font-semibold">05</span>
               <span className="w-6 h-[1px] bg-stone-700/80" />
               <span className="uppercase tracking-wider text-stone-400">Open Source</span>
-              <div className="p-2 rounded-full bg-white/[0.08] text-white">
+              <div className="p-2 rounded-full bg-white/[0.08] text-stone-200">
                 <FiGithub className="w-4 h-4" />
               </div>
             </div>
 
             {/* Middle Title & Description */}
             <div className="space-y-2">
-              <h3 className={`${playfairDisplay.className} text-2xl sm:text-3xl text-white font-medium`}>
+              <h3 className={`${playfairDisplay.className} text-2xl sm:text-3xl text-stone-100 font-medium`}>
                 More on GitHub.
               </h3>
               <p className={`${inter.className} text-stone-400 text-xs sm:text-sm leading-relaxed line-clamp-3`}>
@@ -171,7 +171,7 @@ function Projects() {
               href="https://github.com/MohammedIrfan244"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between p-3.5 bg-white/[0.05] hover:bg-white/[0.12] border border-white/10 rounded-xl text-white transition-all duration-300 group-hover:border-white/20"
+              className="flex items-center justify-between p-3.5 bg-white/[0.05] hover:bg-white/[0.12] border border-white/10 rounded-xl text-stone-100 transition-all duration-300 group-hover:border-white/20"
             >
               <span className="font-mono text-xs font-semibold tracking-wider">
                 Visit @MohammedIrfan244
